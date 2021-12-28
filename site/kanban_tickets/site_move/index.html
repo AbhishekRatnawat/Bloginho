@@ -1,0 +1,5703 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>Site Move - Ops Runbooks for Fields</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#site-move" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Ops Runbooks for Fields" class="md-header__button md-logo" aria-label="Ops Runbooks for Fields" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ops Runbooks for Fields
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Site Move
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/acquia/ops-runbook-fields.git/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Ops Runbooks for Fields" class="md-nav__button md-logo" aria-label="Ops Runbooks for Fields" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Ops Runbooks for Fields
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/acquia/ops-runbook-fields.git/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome to Ops Runbooks for Fields
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../toc/" class="md-nav__link">
+        Table of Contents
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Escalation procedures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Escalation procedures" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Escalation procedures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../escalation_procedures/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Incident response
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Incident response" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Incident response
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/" class="md-nav__link">
+        Alerts by Check Name
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/Node.js-server-memory-nearing-threashold/" class="md-nav__link">
+        Node.js server memory nearing threashold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/Node.js_degradeded_stack/" class="md-nav__link">
+        Node.js Degraded stack alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/ah-config-iptables_locked/" class="md-nav__link">
+        ah-config-iptables locked
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/ah-critical/" class="md-nav__link">
+        Master AH_CRITICAL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/ah-resource-mon/" class="md-nav__link">
+        ah-resource-mon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/alerts_pagerduty_outage/" class="md-nav__link">
+        How to Survive During a Pagerduty Outage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/backup_check/" class="md-nav__link">
+        Backup Check
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/blocked_fcw_run/" class="md-nav__link">
+        Blocked Fields Config Web Run alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_auditd/" class="md-nav__link">
+        Check Auditd Agent
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_clamav/" class="md-nav__link">
+        As a first step
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_filesystem_fencing/" class="md-nav__link">
+        Check Filesystem Fencing alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_gluster_transport_endpoint_error/" class="md-nav__link">
+        Check Gluster Transport endpoint error
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_perfmon_data_is_recent/" class="md-nav__link">
+        Check perfmon data is recent
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_possible_hung_tasks/" class="md-nav__link">
+        Check Possible Hung Tasks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_ssl_certificate/" class="md-nav__link">
+        Check SSL Certificate
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/critical_service_port_revoked/" class="md-nav__link">
+        Critical Service Port Revoked
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/db_binlogs/" class="md-nav__link">
+        MySQL binary log troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/dead_backup_tasks/" class="md-nav__link">
+        Dead Backup Tasks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/debugging_php/" class="md-nav__link">
+        Debugging PHP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/disk_partitions/" class="md-nav__link">
+        Disk Partitions Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/disk_writable/" class="md-nav__link">
+        Disk Writable Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/elb_issues/" class="md-nav__link">
+        ELB Issues
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/fix-missing-glusterd_vol-file/" class="md-nav__link">
+        Fix missing glusterd.vol file
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/gluster-not-split-brain/" class="md-nav__link">
+        Not Split-brain
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/gluster-troubleshooting/" class="md-nav__link">
+        Gluster Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/impaired_server_relaunch/" class="md-nav__link">
+        Relaunching impaired servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/index_ping_not_initiated/" class="md-nav__link">
+        Sum Invocations LessThanThreshold 2.0 for FunctionName InitiateIndexCheck
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/instance_management_acp/" class="md-nav__link">
+        ACP Instance Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/maintenance_past_due/" class="md-nav__link">
+        Maintenance Past Due
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/malicious_high_traffic_hosts/" class="md-nav__link">
+        Blocking Crawlers and Malicious High-Traffic Hosts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mon_server_host_count/" class="md-nav__link">
+        Mon Server Host Count
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/monitoring_audit/" class="md-nav__link">
+        Monitoring Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/monthly_eip_audit/" class="md-nav__link">
+        Handling monthly EIP audit tickets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/multiregion_rsync_verification/" class="md-nav__link">
+        MultiRegion Rsync Verification
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mysql_available/" class="md-nav__link">
+        MySQL Available
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mysql_debian_sys_maint/" class="md-nav__link">
+        MySQL Debian Sys Maint alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mysql_failover/" class="md-nav__link">
+        MySQL Failover
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mysql_replication_lag/" class="md-nav__link">
+        MySQL replication lag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/nagios_configuration/" class="md-nav__link">
+        Nagios Configuration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/nginx_config_test/" class="md-nav__link">
+        NGINX Configtest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/nxephem_nginx/" class="md-nav__link">
+        Nxephem Nginx Configtest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/out_of_memory_errors/" class="md-nav__link">
+        Out Of Memory (OOM) errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/perf_url_mon/" class="md-nav__link">
+        Perf URL Mon Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/pupgov/" class="md-nav__link">
+        Pupgov Alerts Runbook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/puppet_agent_disabled/" class="md-nav__link">
+        Puppet Agent Disabled alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/puppet_agent_run_status/" class="md-nav__link">
+        Puppet Agent Run Status
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/search_index_mon/" class="md-nav__link">
+        Search Core Index Alerts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/services_check/" class="md-nav__link">
+        Services Check
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/site_capacity/" class="md-nav__link">
+        Site Capacity alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tomcat_memory_check/" class="md-nav__link">
+        Tomcat Memory Check alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tomcat_running/" class="md-nav__link">
+        Tomcat Running alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/triage_unresponsive_servers/" class="md-nav__link">
+        Triage unresponsive ACE, ACP, ACSF, Network, trex and [WMG/UMG]Gardens servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tungsten_latency/" class="md-nav__link">
+        Tungsten Latency
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tungsten_online/" class="md-nav__link">
+        Tungsten Online
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tungsten_troubleshooting/" class="md-nav__link">
+        Troubleshooting Tungsten
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/unmonitored_sites_check/" class="md-nav__link">
+        Unmonitored Site Check alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/varnish_http/" class="md-nav__link">
+        Check Varnish HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/vpn_connection/" class="md-nav__link">
+        VPN Connection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/vpn_mon/" class="md-nav__link">
+        Name of Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/web_audit/" class="md-nav__link">
+        Web Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_62" type="checkbox" id="__nav_4_62" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_62">
+          Host alert
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Host alert" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_62">
+          <span class="md-nav__icon md-icon"></span>
+          Host alert
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/host_alert/fsdbmesh/" class="md-nav__link">
+        fsdbmesh
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/host_alert/master/" class="md-nav__link">
+        Master Down
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Kanban tickets
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Kanban tickets" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Kanban tickets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Kanban Tickets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.81_release/" class="md-nav__link">
+        1.81 Hosting Release
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acquiamail/" class="md-nav__link">
+        Acquiamail.acquia.com Dump Restore
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acsf_deprovision/" class="md-nav__link">
+        Site Factory Sitegroup Deprovisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acsf_proxy/" class="md-nav__link">
+        Identify ACSF Follower and Proxy Environments
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add_custom_proxy_conf/" class="md-nav__link">
+        Add a custom Mod-Proxy file to a Site
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add_remove_site_mon/" class="md-nav__link">
+        Add/Remove Sites to/from Monitoring
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add_remove_webs_from_rotation/" class="md-nav__link">
+        Add/Remove Webs From Rotation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add_user/" class="md-nav__link">
+        Bastion Provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ahrabot/" class="md-nav__link">
+        Modify the list of bastion users that can sudo ahrabot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arbitrary_php.ini_settings/" class="md-nav__link">
+        Arbitrary php.ini settings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bastion_access/" class="md-nav__link">
+        Bastion Access User Changes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bastion_troubleshooting/" class="md-nav__link">
+        Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bulk_site_move/" class="md-nav__link">
+        Bulk Site Move
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bulk_site_php_edits/" class="md-nav__link">
+        Bulk Site PHP Edits
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../capacity-limit/" class="md-nav__link">
+        Edge Cluster Capacity limit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../change_balancers_on_existing_environment/" class="md-nav__link">
+        Change balancers on existing environment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../change_db_password/" class="md-nav__link">
+        Site Database Password Change
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clamav/" class="md-nav__link">
+        ClamAV Daemon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_checkout_failures/" class="md-nav__link">
+        Code Checkout Failures
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuring_hsd_for_sites/" class="md-nav__link">
+        HSD (Higher Site Density)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core_dumps/" class="md-nav__link">
+        Enable Coredumps for Capturing PHP Segfaults
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../create_test_balancer/" class="md-nav__link">
+        Create a test balancer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom_tungsten_settings/" class="md-nav__link">
+        Custom Tungsten Settings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dedicated_hypervisor/" class="md-nav__link">
+        Set tenancy for the servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dedicated_memcache/" class="md-nav__link">
+        Dedicated Memcache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../delete_search_index/" class="md-nav__link">
+        Deleting a Search Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy_certificate/" class="md-nav__link">
+        Deploying an SSL / TLS certificate to a balancer cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy_test_vcl/" class="md-nav__link">
+        Deploy custom VCL for customer testing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deprovision_search_colony/" class="md-nav__link">
+        Deprovision a Search Colony
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deprovision_search_farm/" class="md-nav__link">
+        Deprovision a Search Farm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deprovisioning_ace/" class="md-nav__link">
+        Deprovisioning ACE & ACP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deprovisioning_mail_server/" class="md-nav__link">
+        Deprovisoning a mail server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagnostics/" class="md-nav__link">
+        Diagnostics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disable_tls_version/" class="md-nav__link">
+        Disable TLS versions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../duplicate_certificates/" class="md-nav__link">
+        Duplicate Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../edge_cluster/" class="md-nav__link">
+        Edge Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elb_creation/" class="md-nav__link">
+        ELB Creation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../email_blacklist/" class="md-nav__link">
+        Acquia Email Server Blacklist Removal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enabling_mod_proxy/" class="md-nav__link">
+        Enabling Mod-Proxy on a Site
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enabling_xdebug/" class="md-nav__link">
+        Enabling xdebug for a Site
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extended_validation_certificates/" class="md-nav__link">
+        Extended Validation Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fix_livedev/" class="md-nav__link">
+        Fixing/Enabling livedev
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generating_csrs/" class="md-nav__link">
+        Generating a Certificate Signing Request (CSR)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gluster-downgrade/" class="md-nav__link">
+        Downgrade Gluster Version from 3.4 to 3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gluster-upgrade/" class="md-nav__link">
+        Upgrade Gluster Version from 3.0 to 3.4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loadtest_balancer/" class="md-nav__link">
+        Load Test Balancer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logforward/" class="md-nav__link">
+        Log Forwarding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manage_end_to_end_encryption/" class="md-nav__link">
+        Manage End To End Encryption
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../masterless_puppet/" class="md-nav__link">
+        Masterless Puppet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../move_customer_repo/" class="md-nav__link">
+        Move Sitegroup Repo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../move_provisioning_pointer/" class="md-nav__link">
+        Moving the Index Provisioning Pointer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_region_failover_testing/" class="md-nav__link">
+        Performing a Multi-Region Failover Test
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_tier_to_full_tier/" class="md-nav__link">
+        Multi-tier to Full-tier Upsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi_tier_to_single_tier/" class="md-nav__link">
+        Multi-tier to Single-tier Downsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mysql-daily-replication-fix/" class="md-nav__link">
+        MySQL Daily Replication Fix
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mysql_audit/" class="md-nav__link">
+        Enabling or Disabling MySQL Auditing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mysql_upgrade_5733/" class="md-nav__link">
+        MySQL / Percona Server 5.7.33 Upgrade
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../orphans/" class="md-nav__link">
+        Orphans
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        SSL Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../point_in_time_recovery/" class="md-nav__link">
+        MySQL Point in Time Recovery
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preallocating_eips_for_webs/" class="md-nav__link">
+        Preallocating EIPs for webs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_ace/" class="md-nav__link">
+        Gather Information
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_ace_customer/" class="md-nav__link">
+        Provision customer hardware and sites
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_ace_dedicated_cron/" class="md-nav__link">
+        Dedicated Cron
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_ace_empfree/" class="md-nav__link">
+        Provisioning employee free sites
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_ace_infra/" class="md-nav__link">
+        Provision shared and infra hardware
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_acp/" class="md-nav__link">
+        Manually Provision a DevCloud Site & Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_acsf/" class="md-nav__link">
+        Site Factory provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_bastion/" class="md-nav__link">
+        Provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_log_server/" class="md-nav__link">
+        Log Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_multi_region/" class="md-nav__link">
+        Multi-Region Provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_search_colony/" class="md-nav__link">
+        Provisioning a Search Colony
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_search_farm/" class="md-nav__link">
+        Provision a Search Farm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provision_site/" class="md-nav__link">
+        Site Provision
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provisioning_a_fedramp_site_with_acquia_shield/" class="md-nav__link">
+        Provision FedRAMP Customer Site with Acquia Cloud Shield
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provisioning_a_fedramp_site_without_acquia_shield/" class="md-nav__link">
+        Provision FedRAMP Customer Site without Acquia Cloud Shield
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provisioning_mail_server/" class="md-nav__link">
+        Provisioning a mail server for Acquia Hosting Platform
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../puppet_master/" class="md-nav__link">
+        Generating and updating the root CA cert for puppet master
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regenerate_netrcs/" class="md-nav__link">
+        Regenerating netrc Credentials
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releasing_domains/" class="md-nav__link">
+        Site Domains Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remove_user/" class="md-nav__link">
+        Deprovision User Access
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../renewing_certificates/" class="md-nav__link">
+        Renewing SSL Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../renewing_puppet_master_cert/" class="md-nav__link">
+        Renewing SSL cert for puppet master
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resize_volumes_bastion/" class="md-nav__link">
+        Modify volumes on bastions manually
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../restore_snapshot_on_new_hardware/" class="md-nav__link">
+        Restore Snapshots on New Hardware (ACE)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../restore_volumes/" class="md-nav__link">
+        Restore Volume Backups
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../revert_ssl/" class="md-nav__link">
+        Restoring an Acquia-Managed SSL Cert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../root_cause_analysis/" class="md-nav__link">
+        Root Cause Analysis Process
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_audit/" class="md-nav__link">
+        Shared Search Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_cert_update/" class="md-nav__link">
+        Renewal ACM Certificates In Search Realm ELBs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_index_migration/" class="md-nav__link">
+        Search Index Migration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../secondary_db_cluster/" class="md-nav__link">
+        Provisioning of single-region secondary database cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../self_service_ssl/" class="md-nav__link">
+        Self-service SSL (on ELBs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../single_tier_to_multi_tier/" class="md-nav__link">
+        Single-tier to Multi-tier Upsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../single_tier_to_multi_tier_manual/" class="md-nav__link">
+        Single-tier to Multi-tier Upsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../site_audit/" class="md-nav__link">
+        Performing a Site Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Site Move
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Site Move
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vpc" class="md-nav__link">
+    VPC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#odecde-instructions" class="md-nav__link">
+    ODE/CDE instructions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#site-factory" class="md-nav__link">
+    Site Factory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparation" class="md-nav__link">
+    Preparation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procedure" class="md-nav__link">
+    Procedure
+  </a>
+  
+    <nav class="md-nav" aria-label="Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note" class="md-nav__link">
+    Important Note
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syncing-data-prior-to-downtime" class="md-nav__link">
+    Syncing Data Prior to Downtime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#same-region" class="md-nav__link">
+    Same Region
+  </a>
+  
+    <nav class="md-nav" aria-label="Same Region">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#home-directory-copy-commands" class="md-nav__link">
+    Home directory copy commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#site-move-same-region" class="md-nav__link">
+    Site Move - Same region
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#different-regions" class="md-nav__link">
+    Different Regions
+  </a>
+  
+    <nav class="md-nav" aria-label="Different Regions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables-different-regions" class="md-nav__link">
+    Variables - Different regions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#home-directory-copy-commands-multi-region" class="md-nav__link">
+    Home directory copy commands multi-region
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#site-move-different-region" class="md-nav__link">
+    Site Move - Different region
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    Verification
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recovery" class="md-nav__link">
+    Recovery
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleanup" class="md-nav__link">
+    Cleanup
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sni_ssl/" class="md-nav__link">
+        SNI Certificates (deployed to bals)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssl_acm/" class="md-nav__link">
+        AWS Certificate Manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../staging_single_tier_to_multi_tier_manual/" class="md-nav__link">
+        Staging Single Tier to Multi-tier Upsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../svn_server_certificates/" class="md-nav__link">
+        SVN Server Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../toc/" class="md-nav__link">
+        Kanban Tickets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting_bastion/" class="md-nav__link">
+        Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting_yubikey/" class="md-nav__link">
+        Troubleshooting Yubikey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unblocking_email_service/" class="md-nav__link">
+        Unblock Email Sending for a Customer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unique_multisite_hash_salt/" class="md-nav__link">
+        Enabling Unique Multisite Hash Salt on a Site
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../update_colony_certificate/" class="md-nav__link">
+        Update Search Colony Certificate
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../varnish_gather/" class="md-nav__link">
+        VarnishGather
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verify_extractor/" class="md-nav__link">
+        Search Extractor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpc_deprovision/" class="md-nav__link">
+        Deprovision a VPC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpc_network_boundaries/" class="md-nav__link">
+        VPC Network Boundaries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpc_provision/" class="md-nav__link">
+        Provision a VPC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpc_to_vpc/" class="md-nav__link">
+        VPC to VPC  Migration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpc_vpn_deprovision/" class="md-nav__link">
+        Deprovision a Shield VPN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpc_vpn_management/" class="md-nav__link">
+        Updating Shield VPNs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpc_vpn_provision/" class="md-nav__link">
+        Provisioning a Shield VPN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wildcard_certificates/" class="md-nav__link">
+        Wildcard Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_119" type="checkbox" id="__nav_5_119" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_119">
+          Dedicated bals
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dedicated bals" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_119">
+          <span class="md-nav__icon md-icon"></span>
+          Dedicated bals
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dedicated_bals/dedicated_to_dedicated/" class="md-nav__link">
+        Dedicated To Dedicated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dedicated_bals/dedicated_to_shared/" class="md-nav__link">
+        Dedicated to Shared
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dedicated_bals/shared_to_dedicated/" class="md-nav__link">
+        Shared to Dedicated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dedicated_bals/shared_to_shared/" class="md-nav__link">
+        Shared to Shared
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_120" type="checkbox" id="__nav_5_120" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_120">
+          Test vcl
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Test vcl" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_120">
+          <span class="md-nav__icon md-icon"></span>
+          Test vcl
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test_vcl/automated/" class="md-nav__link">
+        Test VCL Deployment - Automated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test_vcl/manual/" class="md-nav__link">
+        Test VCL Deployment - MANUAL
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Ops infrastructure
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ops infrastructure" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Ops infrastructure
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/" class="md-nav__link">
+        Ops Infrastructure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/alerts/" class="md-nav__link">
+        alerts.ops.acquia.com
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/compiling_ah_check_http/" class="md-nav__link">
+        Compiling nagios plugin check_http for mon2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/gordon_deploy/" class="md-nav__link">
+        OPS-Gordon Deployment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/gordon_prod_issues/" class="md-nav__link">
+        OPS-Gordon Production Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/oneoffs/" class="md-nav__link">
+        General Information About One-Off Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/perfmon/" class="md-nav__link">
+        perf-mon.ops.acquia.com
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Ops reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ops reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Ops reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/" class="md-nav__link">
+        Ops Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/deploy_secrets_masterless/" class="md-nav__link">
+        Deploying secrets with Masterless Puppet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/scp/" class="md-nav__link">
+        SCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/services_overview/" class="md-nav__link">
+        Overview of Common Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/ssh_between_servers/" class="md-nav__link">
+        SSHing Between Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/ssh_search_jumpbox/" class="md-nav__link">
+        Search Jumpboxes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/strace/" class="md-nav__link">
+        Using `strace`
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Realm management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Realm management" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Realm management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/" class="md-nav__link">
+        Realm Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_data_backup/" class="md-nav__link">
+        Audit Data Backup Log
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_iptables_sgroups/" class="md-nav__link">
+        Audit IPtables Security Groups
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_services_protocols_ports/" class="md-nav__link">
+        Audit Services Protocols Ports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_sudoers/" class="md-nav__link">
+        Audit Sudoers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_user_access/" class="md-nav__link">
+        User Access Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/mntfs-volume-reaping/" class="md-nav__link">
+        Reaping of Unused `/mnt` EBS Volumes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/mysql_restarts/" class="md-nav__link">
+        MySQL Restart Mass Process
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/patching/" class="md-nav__link">
+        Mass patching
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/provision_new_region/" class="md-nav__link">
+        Provision New Region
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/qna_on_reboot_relaunches/" class="md-nav__link">
+        Frequently Asked Questions on Reboots and Relaunches
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/reboot_balancers/" class="md-nav__link">
+        Reboot Bals Using Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/reboot_master/" class="md-nav__link">
+        Reboot a Master
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/reboot_search/" class="md-nav__link">
+        Mass Rebooting Search Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/rebooting_aws/" class="md-nav__link">
+        Mass patching using AWS method
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/rebooting_relaunching/" class="md-nav__link">
+        Mass Rebooting and Relaunching Procedure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch/" class="md-nav__link">
+        Relaunch Instances
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_backup/" class="md-nav__link">
+        Backup Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_balancers/" class="md-nav__link">
+        Relaunch Bals Using Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_master/" class="md-nav__link">
+        Relaunch a Master
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_master_manual/" class="md-nav__link">
+        Relaunch a Master (manual process)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_search/" class="md-nav__link">
+        Mass Relaunching Search Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/site_config_changes/" class="md-nav__link">
+        Bulk config settings changes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/volume_relaunch_fix/" class="md-nav__link">
+        Volume Relaunch Fix
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_25" type="checkbox" id="__nav_8_25" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_25">
+          Procedures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Procedures" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_25">
+          <span class="md-nav__icon md-icon"></span>
+          Procedures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/backup/" class="md-nav__link">
+        Reboot Backup Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/balancer/" class="md-nav__link">
+        Balancer Mass Reboots / Relaunches
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/cplane/" class="md-nav__link">
+        Control Plane
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/custom_servers/" class="md-nav__link">
+        Custom servers (`custom`)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/databases/" class="md-nav__link">
+        Database Mass Reboot/Relaunch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/fs/" class="md-nav__link">
+        Filesystem Server Mass Reboot/Relaunch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/manual_databases/" class="md-nav__link">
+        Databases (dbmaster, ded, fsdb)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/manual_fs/" class="md-nav__link">
+        Filesystem Server Mass Reboot/Relaunch - Manual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/manual_webs/" class="md-nav__link">
+        Manual Reboot or Relaunch Webs(`api`, `web`)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/non_ha/" class="md-nav__link">
+        Customer Non-HA Servers (`free`, `srv`, `staging`, `api`)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/reboot_node_servers/" class="md-nav__link">
+        Rebooting node/nodebal servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/relaunch_node_servers/" class="md-nav__link">
+        Relaunching node/nodebal servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/task/" class="md-nav__link">
+        Task Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/tungsten/" class="md-nav__link">
+        Multiregion Database Mass Reboot/Relaunch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/webs/" class="md-nav__link">
+        Webs (`web`)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/workflow_errors/" class="md-nav__link">
+        Dealing with Workflow errors
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Runbook metadocs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Runbook metadocs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Runbook metadocs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runbook_metadocs/" class="md-nav__link">
+        Runbook Metadocs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runbook_metadocs/contribution/" class="md-nav__link">
+        Welcome to Contributing to Ops Runbooks for Fields
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runbook_metadocs/style/" class="md-nav__link">
+        Ops Runbook (Fields) Style Guide
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Secondary response
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Secondary response" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Secondary response
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/" class="md-nav__link">
+        Secondary Response
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/cpu_wait/" class="md-nav__link">
+        Diagnosing CPU Wait problems
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/db_error_lock_wait_timeout/" class="md-nav__link">
+        MySQL lock_wait_timeout errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/disable_acp_sales/" class="md-nav__link">
+        Disable DevCloud Purchases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/dump_restore_all/" class="md-nav__link">
+        Dump Restore All Tungsten Hosts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/dump_restore_single/" class="md-nav__link">
+        Dump Restore A Single Tungsten Slave
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/dump_restore_workflow/" class="md-nav__link">
+        MySQL Dump Restore Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/fencing/" class="md-nav__link">
+        Fencing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/fix-1970-timestamps/" class="md-nav__link">
+        Fix 1970 timestamps for files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/mysql_service_issue_during_volume_resize/" class="md-nav__link">
+        Fix MySQL service issue occured during volume resize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/mysql_startup_failures/" class="md-nav__link">
+        MySQL Startup Failure Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/pt-kill/" class="md-nav__link">
+        pt-kill
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/reduce_sf_mysql_disk_usage/" class="md-nav__link">
+        Reduce Site Factory MySQL Disk Usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/replacing-brick-volumes/" class="md-nav__link">
+        Replacing Brick Volumes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/replacing-bricks/" class="md-nav__link">
+        Replacing Gluster Bricks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/search_disk_partitions/" class="md-nav__link">
+        Search Disk Partitions Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/split-brain/" class="md-nav__link">
+        Split-brain
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/tungsten_administration/" class="md-nav__link">
+        General Administration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/xtrabackup/" class="md-nav__link">
+        Xtrabackup Dump Restore
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          Standard maintenance
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Standard maintenance" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Standard maintenance
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/" class="md-nav__link">
+        Standard Maintenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/audit_shared_bal_pairs/" class="md-nav__link">
+        Audit Shared Bal Pairs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/az_migration/" class="md-nav__link">
+        AZ Migration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/az_migration_manual/" class="md-nav__link">
+        Manual AZ Migration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/az_migration_manual_volume_m/" class="md-nav__link">
+        AZ Migration (xvdm)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/az_migration_manual_volume_mn/" class="md-nav__link">
+        AZ Migration (xvdm xvdn)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/az_migration_manual_volume_mno/" class="md-nav__link">
+        AZ Migration (xvdm xvdn xvdo)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/az_migration_manual_volume_no/" class="md-nav__link">
+        AZ Migration (xvdn xvdo)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/fedramp_relaunch/" class="md-nav__link">
+        Relaunching into FedRAMP compliance VPC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/fips-140-2/" class="md-nav__link">
+        FIPS 140-2 compliant instance management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/moving_a_fedramp_site_with_acquia_shield/" class="md-nav__link">
+        Moving a FedRAMP Site with Acquia Cloud Shield
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/moving_a_fedramp_site_without_acquia_shield/" class="md-nav__link">
+        Moving a FedRAMP Site without Acquia Cloud Shield
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/relaunch_bastion/" class="md-nav__link">
+        Relaunching
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/replace_volumes/" class="md-nav__link">
+        Replacing a Bad Volume Manually
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/resize_volumes/" class="md-nav__link">
+        Resize volumes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/resize_volumes_manual/" class="md-nav__link">
+        Resize volumes manually
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11_17" type="checkbox" id="__nav_11_17" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11_17">
+          Fips 140 2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Fips 140 2" data-md-level="2">
+        <label class="md-nav__title" for="__nav_11_17">
+          <span class="md-nav__icon md-icon"></span>
+          Fips 140 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/fips-140-2/fips_check/" class="md-nav__link">
+        Check whether a server is already FIPS compliant
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/fips-140-2/fips_disable/" class="md-nav__link">
+        Disable FIPS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/fips-140-2/fips_enable/" class="md-nav__link">
+        Enable FIPS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/fips-140-2/fips_migrate_db/" class="md-nav__link">
+        Enable FIPS on DB servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/fips-140-2/fips_mysql_upgrade/" class="md-nav__link">
+        Upgrading mysql tier to be FIPS 140-2 compliant
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standard_maintenance/fips-140-2/fips_provision/" class="md-nav__link">
+        FIPS 140-2 compliant server provisioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vpc" class="md-nav__link">
+    VPC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#odecde-instructions" class="md-nav__link">
+    ODE/CDE instructions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#site-factory" class="md-nav__link">
+    Site Factory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparation" class="md-nav__link">
+    Preparation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procedure" class="md-nav__link">
+    Procedure
+  </a>
+  
+    <nav class="md-nav" aria-label="Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note" class="md-nav__link">
+    Important Note
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syncing-data-prior-to-downtime" class="md-nav__link">
+    Syncing Data Prior to Downtime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#same-region" class="md-nav__link">
+    Same Region
+  </a>
+  
+    <nav class="md-nav" aria-label="Same Region">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#home-directory-copy-commands" class="md-nav__link">
+    Home directory copy commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#site-move-same-region" class="md-nav__link">
+    Site Move - Same region
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#different-regions" class="md-nav__link">
+    Different Regions
+  </a>
+  
+    <nav class="md-nav" aria-label="Different Regions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables-different-regions" class="md-nav__link">
+    Variables - Different regions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#home-directory-copy-commands-multi-region" class="md-nav__link">
+    Home directory copy commands multi-region
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#site-move-different-region" class="md-nav__link">
+    Site Move - Different region
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    Verification
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recovery" class="md-nav__link">
+    Recovery
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleanup" class="md-nav__link">
+    Cleanup
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/acquia/ops-runbook-fields.git/edit/master/docs/kanban_tickets/site_move.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="site-move">Site Move</h1>
+<p>This procedure guides you through moving a site from one stack of servers to another.</p>
+<h2 id="vpc">VPC</h2>
+<ul>
+<li>When a site is moving to a different VPC, you will need to provision new balancers and an ELB in the destination VPC.</li>
+</ul>
+<h2 id="odecde-instructions">ODE/CDE instructions</h2>
+<p>Please reject the ode site moves, because it's not supported by site move tool, and it only works if on_demand value of the site is 0.
+<a href="https://confluence.acquia.com/pages/viewpage.action?pageId=54138549">this confluence page</a>. If you are being asked to move a site then, make sure the on_demand value is 0.
+And then, inform the requestor about the same.</p>
+<p>To check on_demand value:</p>
+<pre><code>SITE=
+ah-site list $SITE -c on_demand
+</code></pre>
+<ul>
+<li>All the ODE sites have unique platform, where you will not see dedicated database instances like [ded-fsdb-dbmaster] because we are using RDS instances.</li>
+<li>For ODE, the Site-moveduration tool will give an estimate for FS only, and not for DB, as the tool is not designed to connect with RDS instances.</li>
+<li>
+<p>The on_demand value for the ODE sites would be 1. To list all the ODE sites, run:</p>
+<pre><code>ah-site list $SITE1,$SITE2 -w on_demand=1
+</code></pre>
+</li>
+<li>
+<p>To set the on_demand value, run:</p>
+<pre><code>ah-site list $SITE1,$SITE2 -s on_demand=0
+</code></pre>
+</li>
+</ul>
+<h2 id="site-factory">Site Factory</h2>
+<p>Site Factory site moves, such as in the <code>enterprise-g1</code> realm, have some noteworthy differences from site moves in ACE:</p>
+<ul>
+<li>Site Factory sites are comprised of several sitegroups which cannot be moved independently of one another</li>
+<li>ELBs in Site Factory have <a href="/kanban_tickets/provision_acsf#creating-an-elb-for-the-site-factory">extra requirements</a></li>
+<li><a href="#post-steps">Create a DG ticket</a> after the site move is completed.</li>
+</ul>
+<p>Since it is required to move all sites in a Site Factory, it is helpful to understand <a href="https://ops.acquia.com/doc/index.php/Procedures/Provision_%26_Deprovision/Provisioning_Gardens">the sitegroup/sites
+ on a typical site factory</a>.</p>
+<pre><code>esl ${CUSTOMERNAME}%
+</code></pre>
+<p>Each Site Factory has three sitegroups, <code>${CUSTOMERNAME}</code>, <code>${CUSTOMERNAME}sf</code>, and <code>${CUSTOMERNAME}theme</code>.
+These sitegroups are often on separate stacks, so spend time tracking down all of the hardware.
+Within those sitegroups you will see sitenames such as <code>${CUSTOMERNAME}01live</code>, <code>${CUSTOMERNAME}01update</code>,
+<code>${CUSTOMERNAME}01theme</code>, etc.  Note some older site factories may add an underscore, i.e. <code>${CUSTOMERNAME}_sf</code>.
+You will also see <a href="../acsf_proxy/">proxy hosting sites</a> with names like <code>${CUSTOMERNAME}prod</code>. These proxies do not map to hardware.</p>
+<p>Identify all sitegroups, sites, and hardware before beginning the site move.</p>
+<h2 id="preparation">Preparation</h2>
+<p>The following prep work should be completed before the site move is executed:</p>
+<ul>
+<li>
+<p>Verify that the site and destination servers are in the same region. If the regions differ, then balancers and VCS
+repos must move to the new region as well.</p>
+</li>
+<li>
+<p>If site is moved to different region, then customer need to update their DNS. Share the IP with customer in advance else site will be down after site move.</p>
+</li>
+</ul>
+<p>Note : Here SITE is name of a single sitename not the sitegroup.</p>
+<pre><code>SITE=
+DST_FS_SERVER=
+DST_DB_SERVER=
+
+SRC_SRV=$(ah-server list site:${SITE} -w type!=svn| tail -1)
+ah-server list ${SRC_SRV},${DST_FS_SERVER} -c ec2_region --no-name | paste -s \
+  | awk '$1 != $2 { exit 1; }' &amp;&amp; echo "Regions match" || echo "WARNING: Regions do not match"
+</code></pre>
+<ul>
+<li>
+<p>Verify that the destination server has enough disk space to accommodate the new site. This is a hard stop point if
+this check does not pass.</p>
+<pre><code>site-movevolusage ${SITE} ${DST_FS_SERVER} ${DST_DB_SERVER}
+</code></pre>
+</li>
+<li>
+<p>Additionally, if the destination hardware does not exist yet, run the above as follows (with destination sizes):</p>
+<pre><code>site-movevolusage ${SITE} ${DST_FS_SIZE} [e.g. 10G or 10240M] ${DST_DB_SIZE} [e.g. 10G or 10240M]
+</code></pre>
+</li>
+<li>
+<p>If the site is moving to servers in a different region and it has an ELB then verify that the key and cert are on
+the gluster volume at
+Note : Here SITE is name of a single sitename not the sitegroup.</p>
+<pre><code>SITE=
+SITE_ENV=$(ah-site list ${SITE} --no-name -c stage)
+SITEGROUP=$(ah-site list ${SITE} --no-name -c sitegroup)
+
+/home/${SITEGROUP}/${SITE_ENV}/ssl
+</code></pre>
+</li>
+</ul>
+<p>If they are not, assign the ticket to the reporter, set to <code>waiting for Feedback</code>, and ask that the files be provided at that path.</p>
+<ul>
+<li>
+<p>EIPs cannot move between regions, so the customer needs to whitelist any new webnode EIPs before the site move can
+go forward.</p>
+</li>
+<li>
+<p>Please check if suspended or terminated webs are linked with the site or not by running esl2 tool for that particular site:</p>
+<pre><code>esl2 $SITE
+</code></pre>
+</li>
+<li>
+<p>If suspended/terminated webs are showing there, then remove the terminated webs from the site prior the site move:</p>
+<pre><code>ah-site remove-webnode ${SITE} $(ah-server list site:${SITE} -w type=web statusIN1,3 | paste -sd " ")
+</code></pre>
+</li>
+<li>
+<p>Verify whether the source hardware has other sites on it or not and in case of shared hardware EIP will be intact with the source hardware.</p>
+</li>
+</ul>
+<p><strong>NOTE:</strong> For any discrepency reach out to support or ops-coordinator!</p>
+<pre><code>SRC_WEB=(ded/web/staging) * This is the source hardware from where the sites are moving off
+ah-site list on:$SRC_WEB
+</code></pre>
+<ul>
+<li>
+<p>If you need to start at a specific time, calculate the UNIX_START_TIME variable:</p>
+<pre><code> UNIX_START_TIME=$(date -d '2018/03/22 20:00 UTC' +"%s")
+</code></pre>
+<p>add the following flag to your ah-site move command:</p>
+<pre><code> --scheduled-time ${UNIX_START_TIME}
+</code></pre>
+</li>
+<li>
+<p>If you want to resume a workflow task at a specific time, calculate
+   UNIX_START_TIME as above, then schedule it to resume (you must do this after
+   starting the workflow with <code>ah-site move</code> below):</p>
+<pre><code> WORKFLOW_ID=
+ ah-workflow schedule-resume ${WORKFLOW_ID} \
+   --scheduled-time ${UNIX_START_TIME}
+</code></pre>
+</li>
+<li>
+<p>To check scheduled maintenance information and status, Run</p>
+<pre><code> scheduled_task=$(ah-workflow get ${WORKFLOW_ID} | grep -w "scheduled_task_ids.0"|cut -d: -f2)
+
+ wf-scheduled or ah-scheduled-task get $scheduled_task
+</code></pre>
+</li>
+<li>
+<p>To Cancel/Remove the scheduled task in case if your maintenance will be cancelled, Run</p>
+<pre><code>ah-scheduled-task kill $scheduled_task
+</code></pre>
+</li>
+</ul>
+<p><strong>Beware:</strong> Always check the last hrs update in your maintenance ticket for cancellation updates if any.</p>
+<h2 id="procedure">Procedure</h2>
+<p>The procedure varies slightly between moving sites within the same region and moving a site to a new region.</p>
+<p><strong>NOTE:</strong>
+Same region : Once the site move is done, put the old bals back in rotation and put them out of rotation only once customer has confirmed that they have updated the DNS. We should also create a TSR ticket to remove the old bals (if dedicated) or for moving them out of rotation (if bals are shared).</p>
+<p>Different region : Share the new bal pair IP with the customer via support before site move to update the DNS else site will be down till the time DNS is updated by customer after site move.</p>
+<p>Only use one of the sections below.</p>
+<ul>
+<li><a href="#same-region">Same Region</a></li>
+<li><a href="#different-regions">Different Regions</a></li>
+</ul>
+<h3 id="important-note"><em>Important Note</em></h3>
+<blockquote>
+<p><strong><em>Do not abort workflows!</em></strong></p>
+</blockquote>
+<ul>
+<li>If you are unable to resolve a problem with a workflow, raise the incident to Ops Management for approval to escalate it to Cloud through Ops Portal:<ul>
+<li><a href="https://portal.ais.acquia.io/form/clescalate">https://portal.ais.acquia.io/form/clescalate</a></li>
+</ul>
+</li>
+<li>Use this list of components to identify which Cloud team to assign it to:<ul>
+<li><a href="https://confluence.acquia.com/display/CL/Cloud+Workflow+Ownership">https://confluence.acquia.com/display/CL/Cloud+Workflow+Ownership</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="syncing-data-prior-to-downtime">Syncing Data Prior to Downtime</h3>
+<p>The site move workflow can be used in such a way that the majority of a site's data can be rsynced onto the new
+hardware before the site is actually transferred. This "pre-rsync" does not require downtime and can shorten the
+total required downtime for switching hardware. To do this, simply pause the workflow at the step <code>update_site_location_within_the_hosting_api</code>.</p>
+<pre><code>--pause-at-step=update_site_location_within_the_hosting_api
+</code></pre>
+<p>The step which executes the pre-rsync is called <code>pre_migrate_site_files</code>.</p>
+<h3 id="same-region">Same Region</h3>
+<h4 id="variables">Variables</h4>
+<p>Set variables for the <code>SITE</code> to be moved, the lowest-numbered destination <code>DB</code> server, space-separated lists of
+destination <code>WEBS</code> and <code>BALS</code>, and the <code>OP</code> ticket.
+Note : Here SITE is name of a single sitename not the sitegroup.</p>
+<pre><code>    SITE=
+    SITE_ENV=$(ah-site list ${SITE} --no-name -c stage)
+    DST_DB=
+    DST_WEBS=()
+    DST_BALS=()
+    OP=
+    DST_WEBS_CSV=$(array-csv ${DST_WEBS[@]})
+    DST_BALS_CSV=$(array-csv ${DST_BALS[@]})
+</code></pre>
+<h4 id="home-directory-copy-commands">Home directory copy commands</h4>
+<p>These commands are generated now but executed later after site-move for moving customer's home directory contents. Copy these to the OP ticket to be run after the site-move is done</p>
+<pre><code>    while true; do
+      SRC=$(ah-server list site:${SITE} -w typeINded,fs,fsdb,fsdbmesh,staging | head -1)
+      DST_FS_CLUSTER_ID=$(ah-server list ${DST_WEBS_CSV} --no-name -c fs_cluster_id | head -1)
+      DST=$(ah-server list % -w typeINded,fs,fsdb,fsdbmesh,staging fs_cluster_id=${DST_FS_CLUSTER_ID} | head -1)
+      SITEGROUP=$(ah-site list ${SITE} --no-name -c sitegroup)
+      SITEGROUP_UID=$(ah-sitegroup list ${SITEGROUP} --no-name -c unix_uid)
+      echo "{code:title= Move $SITE home directory content from $SRC to $DST}"
+      echo "fssh ${DST} 'sudo mkdir -m755 /mnt/gfs/home'"
+      echo "sv-rsyncfile -o avPu ${SRC}:/mnt/gfs/home/${SITEGROUP}/ ${DST_WEBS[0]}:/mnt/gfs/home/${SITEGROUP}/"
+      echo "fssh ${DST} 'sudo chown -Rh ${SITEGROUP_UID}:${SITEGROUP_UID} /mnt/gfs/home/${SITEGROUP}'"
+      echo "{code}"
+      echo
+      echo 'COPY THE ABOVE OUTPUT TO JIRA TICKET AND EXECUTE THEM LATER AFTER THE SITE MOVE AS LAST STEP'
+      break
+    done
+</code></pre>
+<h4 id="site-move-same-region">Site Move - Same region</h4>
+<ol>
+<li>
+<p>Until CL-46442 is fixed, disable e2e encryption and re-enable it after the site move</p>
+<pre><code>SITE=nginxvarnishtest
+ah-site disable-e2e-encryption --site-names=${SITE}
+✔ Disabled End to End Encryption for nginxvarnishtest
+</code></pre>
+</li>
+<li>
+<p>If the command reports the following you do not need to do take note and do not enable e2e encryption after the site move</p>
+<pre><code>SITE=nginxvarnishtest
+ah-site disable-e2e-encryption --site-names=${SITE}
+XMLRPCRemoteException: The following site(s) do not have end to end encryption enabled: nginxvarnishtest
+</code></pre>
+</li>
+<li>
+<p>As seen in case of OP-272857 (For RA Site), OP-247706 (For RA Site) and OP-278069 (For QA Site), site move WF from any kind of source BAL (Legacy or Edge) to Destination Edge Bals can error out with the error:</p>
+<pre><code>update_site_location_within_the_hosting_api raised error Aq::Hosting::ApiClient::XMLRPCRemoteException
+ERROR: Caught Aq::Hosting::ApiClient::XMLRPCRemoteException while running workflow: Cannot assign a site to balancers without an elastic IP address.
+</code></pre>
+</li>
+<li>
+<p>This error occurs because WF expects the destination Bals to have an EIP whereas Edge Bals don’t have EIPs. To avoid this issue we can take the following steps:</p>
+<ul>
+<li>
+<p>If the destination servers are in a different VPC, please make sure the memcache service is disabled on all the web/ded instances in the destination VPC. This is required to prevent site outage, the site will experience downtime as the web services on sources web/ded serves fails to connect to the memcache services on destination servers in different VPC.</p>
+</li>
+<li>
+<p>If the Source and Destination Bals are same, no need to specify the Bals in WF command.</p>
+<pre><code>ah-site move ${SITE} --webs ${DST_WEBS[@]}  --db ${DST_DB} --force
+</code></pre>
+</li>
+<li>
+<p>Check if the Destination Bals are Edge BALs, using esl2 command.</p>
+<pre><code>esl2 ${SITE}
+</code></pre>
+</li>
+<li>
+<p>If Destination Bals are Edge Bals , you may initiate the Site move WF without specifying the Bals in the wf command.</p>
+<pre><code>ah-site move ${SITE} --webs ${DST_WEBS[@]}  --db ${DST_DB} --force
+</code></pre>
+</li>
+<li>
+<p>Check the memcache requirements after the site move. Enable enable memcache service or add memcache servers if required.</p>
+</li>
+<li>
+<p>After the WF is complete, assign the new BAL values to the site manually, get the <code>CLUSTER_UUID</code> from above <code>esl2</code> command :</p>
+<pre><code>ah-edge add-environment-to-edge-cluster --environment-name=${SITE} --uuid=${CLUSTER_UUID}
+</code></pre>
+</li>
+<li>
+<p>If you started the WF anyway with specifying the BALs and the WF did error out with error : “Cannot assign a site to balancers without an elastic IP address.” ; then clean up the error WF and its so far executed steps (examples as shown in OP-272857, OP-247706). Start a new WF without specifying the BAL.</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong><em>Please do not try to assign an EIP to the EDGE Bals</em></strong></p>
+</blockquote>
+<ol>
+<li>
+<p>If the destination servers are in a different VPC, please make sure the memcache service is disabled on all the web/ded instances in the destination VPC. This is required to prevent site outage, the site will experience downtime as the web services on sources web/ded serves fails to connect to the memcache services on destination servers in different VPC.</p>
+</li>
+<li>
+<p>Start the workflow to move the site. Omit any parameters which are not being changed (i.e. if the site is keeping its current balancers):</p>
+<pre><code>ah-site move ${SITE} --webs ${DST_WEBS[@]} --bals ${DST_BALS[@]} --db ${DST_DB} --force
+</code></pre>
+</li>
+<li>
+<p>If you want to scheduled the site move workflow then use</p>
+<pre><code>ah-site move ${SITE} --webs ${DST_WEBS[@]} --bals ${DST_BALS[@]} --db ${DST_DB} --force --scheduled-time ${UNIX_START_TIME}
+</code></pre>
+</li>
+</ol>
+<p>Caution:Always move the site one by one. Calculate the total migration time and then schedule the site move accordingly.</p>
+<ol>
+<li>
+<p>Check the memcache requirements after the site move. Enable enable memcache service or add memcache servers if required.</p>
+</li>
+<li>
+<p>If the workflow cannot be made to work, trying <a href="#manual-site-move">manually moving the site</a></p>
+</li>
+<li>
+<p>Warning - In case of shared infra EIP will be intact with the source hardware hardware.</p>
+</li>
+<li>
+<p>If the old webs or deds have EIPs, move them to the new webs/deds. VPC to CLASSIC will never be supported due to AWS restrictions.</p>
+<pre><code>ah-server help migrate-eip
+Usage:
+ah-server migrate-eip --destination-server-name=DESTINATION_SERVER_NAME --source-server-name=SOURCE_SERVER_NAME
+# Note. Classic Elastic IPs need to be allocated 24 hours before moving them to vpc which is a hard AWS restriction.
+# Example : ah-server migrate-eip --source-server-name=ded-123 --destination-server-name=ded-596
+</code></pre>
+</li>
+<li>
+<p>Post EIP migration,verify and make sure that the EIPs are moved correctly.</p>
+</li>
+<li>
+<p>In ACE, a site move in the same region allows you to continue to use the same ELB if it exists,
+but you must ensure that the ELB is configured for the new balancers' AZs:</p>
+<pre><code>site-elbdescribe ${SITE}
+</code></pre>
+<p>If the site has an ELB and it is not configured for the right AZs, update it:</p>
+<pre><code>ELB=$(ruby -e "require 'aq'; begin; site_input = '$SITE';
+  site_id = Aq::Hosting::Site.from_name(site_input).record['id'];
+  site_elb = Aq::Hosting::SiteElb.fromQuery('site_id' =&gt; site_id);
+  rescue Aq::Hosting::EntityNotFoundError =&gt; e; puts 'nil'; else; puts site_elb['elb_name'].to_s; end")
+AZS=($(ah-server list ${DST_BALS_CSV} -c ec2_availability_zone --no-name | paste -sd' '))
+aws elb enable-availability-zones-for-load-balancer \
+  --region ${REGION} \
+  --load-balancer-name ${ELB} \
+  --availability-zones ${AZS}
+</code></pre>
+<p>If the site is in a Site Factory realm, follow the steps to create an
+<a href="/kanban_tickets/provision_acsf#creating-an-elb-for-the-site-factory">ELB for Site Factory</a>.
+Deprovision the existing one.</p>
+</li>
+<li>
+<p>If the site previously had e2e enabled, follow the enable e2e runbook to re-enable it. You have to configure mysql only once per server and restart mysql after enabling e2e on the site. Also check and verify the e2e installation as per the steps given in below e2e runbook.</p>
+<ul>
+<li><a href="/kanban_tickets/manage_end_to_end_encryption/#enable-e2e-encryption">Enable e2e after site move</a></li>
+</ul>
+</li>
+<li>
+<p>As a last step, move the contents of the customer's home directory using the <a href="#home-directory-copy-commands">commands we generated above</a> before the site move and copied to JIRA ticket.</p>
+</li>
+</ol>
+<p>Note: Create a TSR to remove /mnt/gfs/SITENAME-MOVED-* directory,which should be executed after 7 days.</p>
+<p>Note: We generally don’t move RA site or environments while moving entire site group. However there are some situations when we also need to move RA environments. For example while moving the entire site into a dedicated VPC or while region moves where RA team has asked for it.</p>
+<h3 id="different-regions">Different Regions</h3>
+<h4 id="variables-different-regions">Variables - Different regions</h4>
+<p>Set variables for the <code>SITE</code> to be moved, the lowest-numbered destination <code>DB</code> server,
+<code>WEBS</code>, and <code>BALS</code>, as applicable, and the <code>OP</code> ticket.
+Note : Here SITE is name of a single sitename not the sitegroup</p>
+<pre><code>    SITE=
+    DST_WEBS=()
+    DST_BALS=()
+    DST_DB=
+    OP=
+    DST_WEBS_CSV=$(array-csv ${DST_WEBS[@]})
+    DST_BALS_CSV=$(array-csv ${DST_BALS[@]})
+</code></pre>
+<h4 id="home-directory-copy-commands-multi-region">Home directory copy commands multi-region</h4>
+<p>These commands are generated now but executed later after site-move for moving customer's home directory contents. Copy these to the OP ticket to be run after the site-move is done</p>
+<pre><code>    while true; do
+      SRC=$(ah-server list site:${SITE} -w typeINded,fs,fsdb,fsdbmesh,staging | head -1)
+      DST_FS_CLUSTER_ID=$(ah-server list ${DST_WEBS_CSV} --no-name -c fs_cluster_id | head -1)
+      DST=$(ah-server list % -w typeINded,fs,fsdb,fsdbmesh,staging fs_cluster_id=${DST_FS_CLUSTER_ID} | head -1)
+      SITEGROUP=$(ah-site list ${SITE} --no-name -c sitegroup)
+      SITEGROUP_UID=$(ah-sitegroup list ${SITEGROUP} --no-name -c unix_uid)
+      echo "{code:title= Move $SITE home directory content from $SRC to $DST}"
+      echo "fssh ${DST} 'sudo mkdir -m755 /mnt/gfs/home'"
+      echo "sv-rsyncfile -o avPu ${SRC}:/mnt/gfs/home/${SITEGROUP}/ ${DST_WEBS[0]}:/mnt/gfs/home/${SITEGROUP}/"
+      echo "fssh ${DST} 'sudo chown -Rh ${SITEGROUP_UID}:${SITEGROUP_UID} /mnt/gfs/home/${SITEGROUP}'"
+      echo "{code}"
+      echo
+      echo 'COPY THE ABOVE OUTPUT TO JIRA TICKET AND EXECUTE THEM LATER AFTER THE SITE MOVE AS LAST STEP'
+      break
+    done
+</code></pre>
+<h4 id="site-move-different-region">Site Move - Different region</h4>
+<ol>
+<li>
+<p>Use <code>site-taglistactive</code> to determine an available SVN instance in the new region and VPC.</p>
+<pre><code>REGION=
+VPC=
+site-taglistactive svn ${REGION} ${VPC}
+SVN=
+</code></pre>
+</li>
+<li>
+<p>Until CL-46442 is fixed, disable e2e encryption and re-enable it after the site move</p>
+<pre><code>SITE=nginxvarnishtest
+ah-site disable-e2e-encryption --site-names=${SITE}
+✔ Disabled End to End Encryption for nginxvarnishtest
+</code></pre>
+</li>
+<li>
+<p>If the command reports the following you do not need to do take note and do not enable e2e encryption after the site move</p>
+<pre><code>SITE=nginxvarnishtest
+ah-site disable-e2e-encryption --site-names=${SITE}
+XMLRPCRemoteException: The following site(s) do not have end to end encryption enabled: nginxvarnishtest
+</code></pre>
+</li>
+<li>
+<p>As seen in case of OP-272857 (For RA Site), OP-247706 (For RA Site) and OP-278069 (For QA Site), site move WF from any kind of source BAL (Legacy or Edge) to Destination Edge Bals can error out with the error:</p>
+<pre><code>update_site_location_within_the_hosting_api raised error Aq::Hosting::ApiClient::XMLRPCRemoteException
+ERROR: Caught Aq::Hosting::ApiClient::XMLRPCRemoteException while running workflow: Cannot assign a site to balancers without an elastic IP address.
+</code></pre>
+</li>
+<li>
+<p>This error occurs because WF expects the destination Bals to have an EIP whereas Edge Bals don’t have EIPs. To avoid this issue we can take the following steps:</p>
+<ul>
+<li>
+<p>Check if the Destination Bals are Edge BALs, using esl2 command.</p>
+<pre><code>esl2 ${SITE}
+</code></pre>
+</li>
+<li>
+<p>If the destination servers are in a different VPC, please make sure the memcache service is disabled on all the web/ded instances in the destination VPC. This is required to prevent site outage, the site will experience downtime as the web services on sources web/ded serves fails to connect to the memcache services on destination servers in different VPC.</p>
+</li>
+<li>
+<p>If Destination Bals are Edge Bals , you may initiate the Site move WF without specifying the Bals in the wf command.</p>
+<pre><code>ah-site move ${SITE} --webs ${DST_WEBS[@]}  --db ${DST_DB} --force
+</code></pre>
+</li>
+<li>
+<p>After the WF is complete, assign the new BAL values to the site manually, get the <code>CLUSTER_UUID</code> from above <code>esl2</code> command.</p>
+<pre><code>ah-edge add-environment-to-edge-cluster --environment-name=${SITE} --uuid=${CLUSTER_UUID}
+</code></pre>
+</li>
+<li>
+<p>If you started the WF anyway with specifying the BALs and the WF did error out with error : “Cannot assign a site to balancers without an elastic IP address.” ; then clean up the error WF and its so far executed steps (examples as shown in OP-272857, OP-247706). Start a new WF without specifying the BAL.</p>
+</li>
+<li>
+<p>Check the memcache requirements after the site move. Enable enable memcache service or add memcache servers if required.</p>
+</li>
+<li>
+<p>In case of Site move to different Region, the EIPs ofcourse can not be moved from one region to another.</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong><em>Please do not try to assign an EIP to the EDGE Bals</em></strong></p>
+</blockquote>
+<ol>
+<li>
+<p>If the destination servers are in a different VPC, please make sure the memcache service is disabled on all the web/ded instances in the destination VPC. This is required to prevent site outage, the site will experience downtime as the web services on sources web/ded serves fails to connect to the memcache services on destination servers in different VPC.</p>
+</li>
+<li>
+<p>Start the workflow to move the site.</p>
+<pre><code>ah-site move ${SITE} --webs ${DST_WEBS[@]} --bals ${DST_BALS[@]} --db ${DST_DB} --force
+</code></pre>
+</li>
+</ol>
+<p>Note that data can be rsynced to the new hardware prior to downtime by pausing at the step <code>update_site_location_within_the_hosting_api</code>.</p>
+<pre><code>    ah-site move ${SITE} --webs ${DST_WEBS[@]} --bals ${DST_BALS[@]} --db ${DST_DB} --force --pause-at-step=update_site_location_within_the_hosting_api --pause-description="$OP | $SITE site move"
+</code></pre>
+<p>If paused, resume the workflow when you are ready to commence downtime. A second rsync pass will occur to transfer any files which were created after the initial pre-rsync was run.</p>
+<ol>
+<li>
+<p>If you want to scheduled the site move workflow then use</p>
+<pre><code>ah-site move ${SITE} --webs ${DST_WEBS[@]} --bals ${DST_BALS[@]} --db ${DST_DB} --force --scheduled-time ${UNIX_START_TIME}
+</code></pre>
+</li>
+<li>
+<p>Check the memcache requirements after the site move. Enable enable memcache service or add memcache servers if required.</p>
+</li>
+<li>
+<p>If you want to resume a presynced workflow task at a specific time, calculate
+   UNIX_START_TIME as above, then schedule it to resume (you must do this after
+   starting the workflow with <code>ah-site move</code> below):</p>
+<pre><code> WORKFLOW_ID=
+ ah-workflow schedule-resume ${WORKFLOW_ID} --scheduled-time ${UNIX_START_TIME}
+</code></pre>
+</li>
+</ol>
+<p>Caution: Always move the site one by one. Calculate the total migration time and then schedule the site move accordingly.</p>
+<ol>
+<li>
+<p>If the workflow cannot be made to work, trying <a href="#manualsite-move">manually moving the site</a></p>
+</li>
+<li>
+<p>Migrate the SVN repo</p>
+<pre><code>SITEGROUP=$(ah-site list ${SITE} --no-name -c sitegroup)
+ah-sitegroup move-repos ${SITEGROUP} ${SVN}
+</code></pre>
+</li>
+<li>
+<p>If the site has an ELB, deprovision it</p>
+<pre><code>site-elbdescribe ${SITE}
+ah-site ssl deprovision-elb ${SITE}
+</code></pre>
+<p>If the customer is using Self-Service SSL, then just notify Support to tell the customer that they will need to
+reconfigure SSL. Otherwise, provision a new ELB and configure it with the key and certs from the prep work. In the
+instructions below, <code>CERT</code> refers to a file with only the identity cert and <code>CA</code> refers to a chain with only the
+intermediate certs.</p>
+<pre><code>CERT=
+CA=
+KEY=
+ah-site ssl create-elb ${SITE} --ca=$CA --cert=$CERT --key=$KEY
+</code></pre>
+<ul>
+<li>If the site move is in Site Factory, follow the specific steps to create an
+<a href="/kanban_tickets/provision_acsf#creating-an-elb-for-the-site-factory">ELB for site factory</a> in the new destination.</li>
+</ul>
+</li>
+<li>
+<p>If the site previously had e2e enabled, follow the enable e2e runbook to re-enable it. You have to configure mysql only once per server and restart mysql after enabling e2e on the site. Also check and verify the e2e installation as per the steps given in below e2e runbook.</p>
+<ul>
+<li><a href="/kanban_tickets/manage_end_to_end_encryption/#enable-e2e-encryption">Enable e2e after site move</a></li>
+</ul>
+</li>
+<li>
+<p>Provide the ticket requester with the EIP of the new balancers, so the customers can update DNS.</p>
+</li>
+<li>
+<p>As a last step, move the contents of the customer's home directory using the <a href="#home-directory-copy-commands-multi-region">commands we generated above</a> before the site move and copied to JIRA ticket.</p>
+</li>
+</ol>
+<p>Note: Create a TSR to remove /mnt/gfs/SITENAME-MOVED-* directory,which should be executed after 7 days.</p>
+<h3 id="verification">Verification</h3>
+<ol>
+<li>
+<p>Verify there are no alerts for any of the hardware or sites affected by the site move.
+All tasks and/or workflows should be done.</p>
+<pre><code>site-checkwebs ${SITE}
+site-check ${SITE}
+</code></pre>
+</li>
+<li>
+<p>If no more sites remain on the source server(s) then verify if they can be deprovisioned and file a TSR ticket to
+deprovision the instances in seven days.</p>
+</li>
+<li>
+<p><strong><em>If Site Factory:</em></strong> Create a DG ticket in JIRA and link to the site move ticket. The site move ticket is
+not done until the DG ticket is done. The ACSF engineering team will perform a cleanup as needed on the new
+hardware. There are typically some caches that need refreshing on the factory, and some files are not brought
+over during the regular process.</p>
+</li>
+</ol>
+<h2 id="recovery">Recovery</h2>
+<p>If the task is any state other than "done", then you must determine what went wrong during the site move. There are
+two major points which the task can fail: migrating data from <code>/vol/ebs1</code>, or migrating data from <code>/mnt/gfs</code>. Examine
+the task output to determine which part of the site move failed.</p>
+<ol>
+<li>
+<p>Databases: follow the procedure for XFS Dump Restore, and restore the data on the destination DB's.</p>
+</li>
+<li>
+<p>File System: Follow the <a href="/ops_reference/ssh_between_servers#temporary-ssh-key">ssh-between-servers runbook</a> to sync the remaining files. Make sure to run the rsync on screen session. An example is below.</p>
+<p><strong>WARNING: Always use a trailing slash with rsync paths!!</strong></p>
+<pre><code>sv-screen screen_name rsync -avPe 'ssh -i /root/.ssh/path_of_key’ /home/${SITEGROUP}/${SITE_ENV}/ ${DST_FS_SERVER}:/home/${SITEGROUP}/${SITE_ENV}/
+fssh ${DST_FS_SERVER} "sudo chown -Rh ${SITEGROUP_UID}:${SITEGROUP_UID} /home/${SITEGROUP}/${SITE_ENV}/"
+</code></pre>
+</li>
+</ol>
+<p><strong>NOTE:</strong> If a site move workflow gets stuck or failed, we should escalate the issue to cloud immediately after getting approval from Ops management.</p>
+<h2 id="cleanup">Cleanup</h2>
+<p>Once the site move is complete and verification successful, you need to cleanup
+the site directory from source web. As part of site move, the site directory on
+the source web will be appended with a string <code>-MOVED-{workflow|task}-{id}</code>.</p>
+<p>For example, the directory on <code>/mnt/gfs</code> will look like <code>${SITE}-MOVED-{workflow|task}-{id}</code>. The site directory has to be manually removed.</p>
+<pre><code>    fssh ${SRC_WEB} "sudo rm -rf /mnt/gfs/${SITE}-MOVED-{workflow|task}-{id}"
+</code></pre>
+<p>If the new feature flag <code>PersistentDataService.SiteMoveUseEnvFileSymlink</code> is set
+to <code>true</code>, it will no longer append the string to the site directory on <code>/mnt/gfs</code>.
+You have to find the site directory on the source web and remove it. You can check
+the value of feature flag using a CLI command and then remove site directory by ssh'ing
+to the source web.</p>
+<pre><code>    bin/ah-stage  get-config --key=PersistentDataService.SiteMoveUseEnvFileSymlink
+    fssh ${SRC_WEB} "sudo rm -rf /mnt/gfs/${SITE}"
+</code></pre>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../site_audit/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Performing a Site Audit" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Performing a Site Audit
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../sni_ssl/" class="md-footer__link md-footer__link--next" aria-label="Next: SNI Certificates (deployed to bals)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              SNI Certificates (deployed to bals)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

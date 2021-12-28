@@ -1,0 +1,5721 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>Resize volumes - Ops Runbooks for Fields</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#resize-volumes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Ops Runbooks for Fields" class="md-header__button md-logo" aria-label="Ops Runbooks for Fields" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ops Runbooks for Fields
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Resize volumes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/acquia/ops-runbook-fields.git/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Ops Runbooks for Fields" class="md-nav__button md-logo" aria-label="Ops Runbooks for Fields" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Ops Runbooks for Fields
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/acquia/ops-runbook-fields.git/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome to Ops Runbooks for Fields
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../toc/" class="md-nav__link">
+        Table of Contents
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Escalation procedures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Escalation procedures" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Escalation procedures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../escalation_procedures/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Incident response
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Incident response" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Incident response
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/" class="md-nav__link">
+        Alerts by Check Name
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/Node.js-server-memory-nearing-threashold/" class="md-nav__link">
+        Node.js server memory nearing threashold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/Node.js_degradeded_stack/" class="md-nav__link">
+        Node.js Degraded stack alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/ah-config-iptables_locked/" class="md-nav__link">
+        ah-config-iptables locked
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/ah-critical/" class="md-nav__link">
+        Master AH_CRITICAL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/ah-resource-mon/" class="md-nav__link">
+        ah-resource-mon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/alerts_pagerduty_outage/" class="md-nav__link">
+        How to Survive During a Pagerduty Outage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/backup_check/" class="md-nav__link">
+        Backup Check
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/blocked_fcw_run/" class="md-nav__link">
+        Blocked Fields Config Web Run alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_auditd/" class="md-nav__link">
+        Check Auditd Agent
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_clamav/" class="md-nav__link">
+        As a first step
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_filesystem_fencing/" class="md-nav__link">
+        Check Filesystem Fencing alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_gluster_transport_endpoint_error/" class="md-nav__link">
+        Check Gluster Transport endpoint error
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_perfmon_data_is_recent/" class="md-nav__link">
+        Check perfmon data is recent
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_possible_hung_tasks/" class="md-nav__link">
+        Check Possible Hung Tasks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/check_ssl_certificate/" class="md-nav__link">
+        Check SSL Certificate
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/critical_service_port_revoked/" class="md-nav__link">
+        Critical Service Port Revoked
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/db_binlogs/" class="md-nav__link">
+        MySQL binary log troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/dead_backup_tasks/" class="md-nav__link">
+        Dead Backup Tasks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/debugging_php/" class="md-nav__link">
+        Debugging PHP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/disk_partitions/" class="md-nav__link">
+        Disk Partitions Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/disk_writable/" class="md-nav__link">
+        Disk Writable Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/elb_issues/" class="md-nav__link">
+        ELB Issues
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/fix-missing-glusterd_vol-file/" class="md-nav__link">
+        Fix missing glusterd.vol file
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/gluster-not-split-brain/" class="md-nav__link">
+        Not Split-brain
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/gluster-troubleshooting/" class="md-nav__link">
+        Gluster Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/impaired_server_relaunch/" class="md-nav__link">
+        Relaunching impaired servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/index_ping_not_initiated/" class="md-nav__link">
+        Sum Invocations LessThanThreshold 2.0 for FunctionName InitiateIndexCheck
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/instance_management_acp/" class="md-nav__link">
+        ACP Instance Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/maintenance_past_due/" class="md-nav__link">
+        Maintenance Past Due
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/malicious_high_traffic_hosts/" class="md-nav__link">
+        Blocking Crawlers and Malicious High-Traffic Hosts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mon_server_host_count/" class="md-nav__link">
+        Mon Server Host Count
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/monitoring_audit/" class="md-nav__link">
+        Monitoring Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/monthly_eip_audit/" class="md-nav__link">
+        Handling monthly EIP audit tickets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/multiregion_rsync_verification/" class="md-nav__link">
+        MultiRegion Rsync Verification
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mysql_available/" class="md-nav__link">
+        MySQL Available
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mysql_debian_sys_maint/" class="md-nav__link">
+        MySQL Debian Sys Maint alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mysql_failover/" class="md-nav__link">
+        MySQL Failover
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/mysql_replication_lag/" class="md-nav__link">
+        MySQL replication lag
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/nagios_configuration/" class="md-nav__link">
+        Nagios Configuration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/nginx_config_test/" class="md-nav__link">
+        NGINX Configtest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/nxephem_nginx/" class="md-nav__link">
+        Nxephem Nginx Configtest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/out_of_memory_errors/" class="md-nav__link">
+        Out Of Memory (OOM) errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/perf_url_mon/" class="md-nav__link">
+        Perf URL Mon Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/pupgov/" class="md-nav__link">
+        Pupgov Alerts Runbook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/puppet_agent_disabled/" class="md-nav__link">
+        Puppet Agent Disabled alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/puppet_agent_run_status/" class="md-nav__link">
+        Puppet Agent Run Status
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/search_index_mon/" class="md-nav__link">
+        Search Core Index Alerts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/services_check/" class="md-nav__link">
+        Services Check
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/site_capacity/" class="md-nav__link">
+        Site Capacity alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tomcat_memory_check/" class="md-nav__link">
+        Tomcat Memory Check alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tomcat_running/" class="md-nav__link">
+        Tomcat Running alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/triage_unresponsive_servers/" class="md-nav__link">
+        Triage unresponsive ACE, ACP, ACSF, Network, trex and [WMG/UMG]Gardens servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tungsten_latency/" class="md-nav__link">
+        Tungsten Latency
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tungsten_online/" class="md-nav__link">
+        Tungsten Online
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/tungsten_troubleshooting/" class="md-nav__link">
+        Troubleshooting Tungsten
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/unmonitored_sites_check/" class="md-nav__link">
+        Unmonitored Site Check alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/varnish_http/" class="md-nav__link">
+        Check Varnish HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/vpn_connection/" class="md-nav__link">
+        VPN Connection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/vpn_mon/" class="md-nav__link">
+        Name of Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/web_audit/" class="md-nav__link">
+        Web Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_62" type="checkbox" id="__nav_4_62" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_62">
+          Host alert
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Host alert" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_62">
+          <span class="md-nav__icon md-icon"></span>
+          Host alert
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/host_alert/fsdbmesh/" class="md-nav__link">
+        fsdbmesh
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incident_response/host_alert/master/" class="md-nav__link">
+        Master Down
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Kanban tickets
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Kanban tickets" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Kanban tickets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/" class="md-nav__link">
+        Kanban Tickets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/1.81_release/" class="md-nav__link">
+        1.81 Hosting Release
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/acquiamail/" class="md-nav__link">
+        Acquiamail.acquia.com Dump Restore
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/acsf_deprovision/" class="md-nav__link">
+        Site Factory Sitegroup Deprovisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/acsf_proxy/" class="md-nav__link">
+        Identify ACSF Follower and Proxy Environments
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/add_custom_proxy_conf/" class="md-nav__link">
+        Add a custom Mod-Proxy file to a Site
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/add_remove_site_mon/" class="md-nav__link">
+        Add/Remove Sites to/from Monitoring
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/add_remove_webs_from_rotation/" class="md-nav__link">
+        Add/Remove Webs From Rotation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/add_user/" class="md-nav__link">
+        Bastion Provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/ahrabot/" class="md-nav__link">
+        Modify the list of bastion users that can sudo ahrabot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/arbitrary_php.ini_settings/" class="md-nav__link">
+        Arbitrary php.ini settings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/bastion_access/" class="md-nav__link">
+        Bastion Access User Changes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/bastion_troubleshooting/" class="md-nav__link">
+        Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/bulk_site_move/" class="md-nav__link">
+        Bulk Site Move
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/bulk_site_php_edits/" class="md-nav__link">
+        Bulk Site PHP Edits
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/capacity-limit/" class="md-nav__link">
+        Edge Cluster Capacity limit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/change_balancers_on_existing_environment/" class="md-nav__link">
+        Change balancers on existing environment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/change_db_password/" class="md-nav__link">
+        Site Database Password Change
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/clamav/" class="md-nav__link">
+        ClamAV Daemon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/code_checkout_failures/" class="md-nav__link">
+        Code Checkout Failures
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/configuring_hsd_for_sites/" class="md-nav__link">
+        HSD (Higher Site Density)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/core_dumps/" class="md-nav__link">
+        Enable Coredumps for Capturing PHP Segfaults
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/create_test_balancer/" class="md-nav__link">
+        Create a test balancer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/custom_tungsten_settings/" class="md-nav__link">
+        Custom Tungsten Settings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/dedicated_hypervisor/" class="md-nav__link">
+        Set tenancy for the servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/dedicated_memcache/" class="md-nav__link">
+        Dedicated Memcache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/delete_search_index/" class="md-nav__link">
+        Deleting a Search Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/deploy_certificate/" class="md-nav__link">
+        Deploying an SSL / TLS certificate to a balancer cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/deploy_test_vcl/" class="md-nav__link">
+        Deploy custom VCL for customer testing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/deprovision_search_colony/" class="md-nav__link">
+        Deprovision a Search Colony
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/deprovision_search_farm/" class="md-nav__link">
+        Deprovision a Search Farm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/deprovisioning_ace/" class="md-nav__link">
+        Deprovisioning ACE & ACP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/deprovisioning_mail_server/" class="md-nav__link">
+        Deprovisoning a mail server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/diagnostics/" class="md-nav__link">
+        Diagnostics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/disable_tls_version/" class="md-nav__link">
+        Disable TLS versions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/duplicate_certificates/" class="md-nav__link">
+        Duplicate Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/edge_cluster/" class="md-nav__link">
+        Edge Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/elb_creation/" class="md-nav__link">
+        ELB Creation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/email_blacklist/" class="md-nav__link">
+        Acquia Email Server Blacklist Removal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/enabling_mod_proxy/" class="md-nav__link">
+        Enabling Mod-Proxy on a Site
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/enabling_xdebug/" class="md-nav__link">
+        Enabling xdebug for a Site
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/extended_validation_certificates/" class="md-nav__link">
+        Extended Validation Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/fix_livedev/" class="md-nav__link">
+        Fixing/Enabling livedev
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/generating_csrs/" class="md-nav__link">
+        Generating a Certificate Signing Request (CSR)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/gluster-downgrade/" class="md-nav__link">
+        Downgrade Gluster Version from 3.4 to 3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/gluster-upgrade/" class="md-nav__link">
+        Upgrade Gluster Version from 3.0 to 3.4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/loadtest_balancer/" class="md-nav__link">
+        Load Test Balancer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/logforward/" class="md-nav__link">
+        Log Forwarding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/manage_end_to_end_encryption/" class="md-nav__link">
+        Manage End To End Encryption
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/masterless_puppet/" class="md-nav__link">
+        Masterless Puppet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/move_customer_repo/" class="md-nav__link">
+        Move Sitegroup Repo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/move_provisioning_pointer/" class="md-nav__link">
+        Moving the Index Provisioning Pointer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/multi_region_failover_testing/" class="md-nav__link">
+        Performing a Multi-Region Failover Test
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/multi_tier_to_full_tier/" class="md-nav__link">
+        Multi-tier to Full-tier Upsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/multi_tier_to_single_tier/" class="md-nav__link">
+        Multi-tier to Single-tier Downsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/mysql-daily-replication-fix/" class="md-nav__link">
+        MySQL Daily Replication Fix
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/mysql_audit/" class="md-nav__link">
+        Enabling or Disabling MySQL Auditing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/mysql_upgrade_5733/" class="md-nav__link">
+        MySQL / Percona Server 5.7.33 Upgrade
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/orphans/" class="md-nav__link">
+        Orphans
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/overview/" class="md-nav__link">
+        SSL Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/point_in_time_recovery/" class="md-nav__link">
+        MySQL Point in Time Recovery
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/preallocating_eips_for_webs/" class="md-nav__link">
+        Preallocating EIPs for webs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_ace/" class="md-nav__link">
+        Gather Information
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_ace_customer/" class="md-nav__link">
+        Provision customer hardware and sites
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_ace_dedicated_cron/" class="md-nav__link">
+        Dedicated Cron
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_ace_empfree/" class="md-nav__link">
+        Provisioning employee free sites
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_ace_infra/" class="md-nav__link">
+        Provision shared and infra hardware
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_acp/" class="md-nav__link">
+        Manually Provision a DevCloud Site & Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_acsf/" class="md-nav__link">
+        Site Factory provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_bastion/" class="md-nav__link">
+        Provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_log_server/" class="md-nav__link">
+        Log Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_multi_region/" class="md-nav__link">
+        Multi-Region Provisioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_search_colony/" class="md-nav__link">
+        Provisioning a Search Colony
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_search_farm/" class="md-nav__link">
+        Provision a Search Farm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provision_site/" class="md-nav__link">
+        Site Provision
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provisioning_a_fedramp_site_with_acquia_shield/" class="md-nav__link">
+        Provision FedRAMP Customer Site with Acquia Cloud Shield
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provisioning_a_fedramp_site_without_acquia_shield/" class="md-nav__link">
+        Provision FedRAMP Customer Site without Acquia Cloud Shield
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/provisioning_mail_server/" class="md-nav__link">
+        Provisioning a mail server for Acquia Hosting Platform
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/puppet_master/" class="md-nav__link">
+        Generating and updating the root CA cert for puppet master
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/regenerate_netrcs/" class="md-nav__link">
+        Regenerating netrc Credentials
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/releasing_domains/" class="md-nav__link">
+        Site Domains Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/remove_user/" class="md-nav__link">
+        Deprovision User Access
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/renewing_certificates/" class="md-nav__link">
+        Renewing SSL Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/renewing_puppet_master_cert/" class="md-nav__link">
+        Renewing SSL cert for puppet master
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/resize_volumes_bastion/" class="md-nav__link">
+        Modify volumes on bastions manually
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/restore_snapshot_on_new_hardware/" class="md-nav__link">
+        Restore Snapshots on New Hardware (ACE)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/restore_volumes/" class="md-nav__link">
+        Restore Volume Backups
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/revert_ssl/" class="md-nav__link">
+        Restoring an Acquia-Managed SSL Cert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/root_cause_analysis/" class="md-nav__link">
+        Root Cause Analysis Process
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/search_audit/" class="md-nav__link">
+        Shared Search Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/search_cert_update/" class="md-nav__link">
+        Renewal ACM Certificates In Search Realm ELBs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/search_index_migration/" class="md-nav__link">
+        Search Index Migration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/secondary_db_cluster/" class="md-nav__link">
+        Provisioning of single-region secondary database cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/self_service_ssl/" class="md-nav__link">
+        Self-service SSL (on ELBs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/single_tier_to_multi_tier/" class="md-nav__link">
+        Single-tier to Multi-tier Upsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/single_tier_to_multi_tier_manual/" class="md-nav__link">
+        Single-tier to Multi-tier Upsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/site_audit/" class="md-nav__link">
+        Performing a Site Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/site_move/" class="md-nav__link">
+        Site Move
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/sni_ssl/" class="md-nav__link">
+        SNI Certificates (deployed to bals)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/ssl_acm/" class="md-nav__link">
+        AWS Certificate Manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/staging_single_tier_to_multi_tier_manual/" class="md-nav__link">
+        Staging Single Tier to Multi-tier Upsize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/svn_server_certificates/" class="md-nav__link">
+        SVN Server Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/toc/" class="md-nav__link">
+        Kanban Tickets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/troubleshooting_bastion/" class="md-nav__link">
+        Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/troubleshooting_yubikey/" class="md-nav__link">
+        Troubleshooting Yubikey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/unblocking_email_service/" class="md-nav__link">
+        Unblock Email Sending for a Customer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/unique_multisite_hash_salt/" class="md-nav__link">
+        Enabling Unique Multisite Hash Salt on a Site
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/update_colony_certificate/" class="md-nav__link">
+        Update Search Colony Certificate
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/varnish_gather/" class="md-nav__link">
+        VarnishGather
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/verify_extractor/" class="md-nav__link">
+        Search Extractor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/vpc_deprovision/" class="md-nav__link">
+        Deprovision a VPC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/vpc_network_boundaries/" class="md-nav__link">
+        VPC Network Boundaries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/vpc_provision/" class="md-nav__link">
+        Provision a VPC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/vpc_to_vpc/" class="md-nav__link">
+        VPC to VPC  Migration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/vpc_vpn_deprovision/" class="md-nav__link">
+        Deprovision a Shield VPN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/vpc_vpn_management/" class="md-nav__link">
+        Updating Shield VPNs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/vpc_vpn_provision/" class="md-nav__link">
+        Provisioning a Shield VPN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/wildcard_certificates/" class="md-nav__link">
+        Wildcard Certificates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_119" type="checkbox" id="__nav_5_119" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_119">
+          Dedicated bals
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dedicated bals" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_119">
+          <span class="md-nav__icon md-icon"></span>
+          Dedicated bals
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/dedicated_bals/dedicated_to_dedicated/" class="md-nav__link">
+        Dedicated To Dedicated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/dedicated_bals/dedicated_to_shared/" class="md-nav__link">
+        Dedicated to Shared
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/dedicated_bals/shared_to_dedicated/" class="md-nav__link">
+        Shared to Dedicated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/dedicated_bals/shared_to_shared/" class="md-nav__link">
+        Shared to Shared
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_120" type="checkbox" id="__nav_5_120" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_120">
+          Test vcl
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Test vcl" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_120">
+          <span class="md-nav__icon md-icon"></span>
+          Test vcl
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/test_vcl/automated/" class="md-nav__link">
+        Test VCL Deployment - Automated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kanban_tickets/test_vcl/manual/" class="md-nav__link">
+        Test VCL Deployment - MANUAL
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Ops infrastructure
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ops infrastructure" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Ops infrastructure
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/" class="md-nav__link">
+        Ops Infrastructure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/alerts/" class="md-nav__link">
+        alerts.ops.acquia.com
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/compiling_ah_check_http/" class="md-nav__link">
+        Compiling nagios plugin check_http for mon2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/gordon_deploy/" class="md-nav__link">
+        OPS-Gordon Deployment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/gordon_prod_issues/" class="md-nav__link">
+        OPS-Gordon Production Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/oneoffs/" class="md-nav__link">
+        General Information About One-Off Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_infrastructure/perfmon/" class="md-nav__link">
+        perf-mon.ops.acquia.com
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Ops reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ops reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Ops reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/" class="md-nav__link">
+        Ops Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/deploy_secrets_masterless/" class="md-nav__link">
+        Deploying secrets with Masterless Puppet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/scp/" class="md-nav__link">
+        SCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/services_overview/" class="md-nav__link">
+        Overview of Common Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/ssh_between_servers/" class="md-nav__link">
+        SSHing Between Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/ssh_search_jumpbox/" class="md-nav__link">
+        Search Jumpboxes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ops_reference/strace/" class="md-nav__link">
+        Using `strace`
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Realm management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Realm management" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Realm management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/" class="md-nav__link">
+        Realm Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_data_backup/" class="md-nav__link">
+        Audit Data Backup Log
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_iptables_sgroups/" class="md-nav__link">
+        Audit IPtables Security Groups
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_services_protocols_ports/" class="md-nav__link">
+        Audit Services Protocols Ports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_sudoers/" class="md-nav__link">
+        Audit Sudoers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/audit_user_access/" class="md-nav__link">
+        User Access Audit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/mntfs-volume-reaping/" class="md-nav__link">
+        Reaping of Unused `/mnt` EBS Volumes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/mysql_restarts/" class="md-nav__link">
+        MySQL Restart Mass Process
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/patching/" class="md-nav__link">
+        Mass patching
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/provision_new_region/" class="md-nav__link">
+        Provision New Region
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/qna_on_reboot_relaunches/" class="md-nav__link">
+        Frequently Asked Questions on Reboots and Relaunches
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/reboot_balancers/" class="md-nav__link">
+        Reboot Bals Using Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/reboot_master/" class="md-nav__link">
+        Reboot a Master
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/reboot_search/" class="md-nav__link">
+        Mass Rebooting Search Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/rebooting_aws/" class="md-nav__link">
+        Mass patching using AWS method
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/rebooting_relaunching/" class="md-nav__link">
+        Mass Rebooting and Relaunching Procedure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch/" class="md-nav__link">
+        Relaunch Instances
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_backup/" class="md-nav__link">
+        Backup Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_balancers/" class="md-nav__link">
+        Relaunch Bals Using Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_master/" class="md-nav__link">
+        Relaunch a Master
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_master_manual/" class="md-nav__link">
+        Relaunch a Master (manual process)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/relaunch_search/" class="md-nav__link">
+        Mass Relaunching Search Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/site_config_changes/" class="md-nav__link">
+        Bulk config settings changes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/volume_relaunch_fix/" class="md-nav__link">
+        Volume Relaunch Fix
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_25" type="checkbox" id="__nav_8_25" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_25">
+          Procedures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Procedures" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_25">
+          <span class="md-nav__icon md-icon"></span>
+          Procedures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/backup/" class="md-nav__link">
+        Reboot Backup Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/balancer/" class="md-nav__link">
+        Balancer Mass Reboots / Relaunches
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/cplane/" class="md-nav__link">
+        Control Plane
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/custom_servers/" class="md-nav__link">
+        Custom servers (`custom`)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/databases/" class="md-nav__link">
+        Database Mass Reboot/Relaunch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/fs/" class="md-nav__link">
+        Filesystem Server Mass Reboot/Relaunch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/manual_databases/" class="md-nav__link">
+        Databases (dbmaster, ded, fsdb)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/manual_fs/" class="md-nav__link">
+        Filesystem Server Mass Reboot/Relaunch - Manual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/manual_webs/" class="md-nav__link">
+        Manual Reboot or Relaunch Webs(`api`, `web`)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/non_ha/" class="md-nav__link">
+        Customer Non-HA Servers (`free`, `srv`, `staging`, `api`)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/reboot_node_servers/" class="md-nav__link">
+        Rebooting node/nodebal servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/relaunch_node_servers/" class="md-nav__link">
+        Relaunching node/nodebal servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/task/" class="md-nav__link">
+        Task Servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/tungsten/" class="md-nav__link">
+        Multiregion Database Mass Reboot/Relaunch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/webs/" class="md-nav__link">
+        Webs (`web`)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../realm_management/procedures/workflow_errors/" class="md-nav__link">
+        Dealing with Workflow errors
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Runbook metadocs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Runbook metadocs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Runbook metadocs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runbook_metadocs/" class="md-nav__link">
+        Runbook Metadocs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runbook_metadocs/contribution/" class="md-nav__link">
+        Welcome to Contributing to Ops Runbooks for Fields
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runbook_metadocs/style/" class="md-nav__link">
+        Ops Runbook (Fields) Style Guide
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Secondary response
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Secondary response" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Secondary response
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/" class="md-nav__link">
+        Secondary Response
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/cpu_wait/" class="md-nav__link">
+        Diagnosing CPU Wait problems
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/db_error_lock_wait_timeout/" class="md-nav__link">
+        MySQL lock_wait_timeout errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/disable_acp_sales/" class="md-nav__link">
+        Disable DevCloud Purchases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/dump_restore_all/" class="md-nav__link">
+        Dump Restore All Tungsten Hosts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/dump_restore_single/" class="md-nav__link">
+        Dump Restore A Single Tungsten Slave
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/dump_restore_workflow/" class="md-nav__link">
+        MySQL Dump Restore Workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/fencing/" class="md-nav__link">
+        Fencing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/fix-1970-timestamps/" class="md-nav__link">
+        Fix 1970 timestamps for files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/mysql_service_issue_during_volume_resize/" class="md-nav__link">
+        Fix MySQL service issue occured during volume resize
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/mysql_startup_failures/" class="md-nav__link">
+        MySQL Startup Failure Troubleshooting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/pt-kill/" class="md-nav__link">
+        pt-kill
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/reduce_sf_mysql_disk_usage/" class="md-nav__link">
+        Reduce Site Factory MySQL Disk Usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/replacing-brick-volumes/" class="md-nav__link">
+        Replacing Brick Volumes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/replacing-bricks/" class="md-nav__link">
+        Replacing Gluster Bricks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/search_disk_partitions/" class="md-nav__link">
+        Search Disk Partitions Alert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/split-brain/" class="md-nav__link">
+        Split-brain
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/tungsten_administration/" class="md-nav__link">
+        General Administration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secondary_response/xtrabackup/" class="md-nav__link">
+        Xtrabackup Dump Restore
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          Standard maintenance
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Standard maintenance" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Standard maintenance
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Standard Maintenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit_shared_bal_pairs/" class="md-nav__link">
+        Audit Shared Bal Pairs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../az_migration/" class="md-nav__link">
+        AZ Migration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../az_migration_manual/" class="md-nav__link">
+        Manual AZ Migration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../az_migration_manual_volume_m/" class="md-nav__link">
+        AZ Migration (xvdm)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../az_migration_manual_volume_mn/" class="md-nav__link">
+        AZ Migration (xvdm xvdn)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../az_migration_manual_volume_mno/" class="md-nav__link">
+        AZ Migration (xvdm xvdn xvdo)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../az_migration_manual_volume_no/" class="md-nav__link">
+        AZ Migration (xvdn xvdo)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fedramp_relaunch/" class="md-nav__link">
+        Relaunching into FedRAMP compliance VPC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fips-140-2/" class="md-nav__link">
+        FIPS 140-2 compliant instance management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moving_a_fedramp_site_with_acquia_shield/" class="md-nav__link">
+        Moving a FedRAMP Site with Acquia Cloud Shield
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moving_a_fedramp_site_without_acquia_shield/" class="md-nav__link">
+        Moving a FedRAMP Site without Acquia Cloud Shield
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relaunch_bastion/" class="md-nav__link">
+        Relaunching
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../replace_volumes/" class="md-nav__link">
+        Replacing a Bad Volume Manually
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Resize volumes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Resize volumes
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#emergency-upsize-guidelines-ace-acsf-only" class="md-nav__link">
+    Emergency upsize guidelines (ACE &amp; ACSF only)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gluster-prep-dumps" class="md-nav__link">
+    Gluster Prep Dumps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparatory-steps" class="md-nav__link">
+    Preparatory steps
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparatory steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-and-attach-the-new-volume" class="md-nav__link">
+    Create and attach the new volume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-data-rsync-method" class="md-nav__link">
+    Copy data: rsync method
+  </a>
+  
+    <nav class="md-nav" aria-label="Copy data: rsync method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note" class="md-nav__link">
+    Important Note
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disclaimer" class="md-nav__link">
+    Disclaimer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-data-xfs-dump-restore-method" class="md-nav__link">
+    Copy data: XFS dump-restore method
+  </a>
+  
+    <nav class="md-nav" aria-label="Copy data: XFS dump-restore method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note_1" class="md-nav__link">
+    Important  Note
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-data-copy-no_data_migration-method" class="md-nav__link">
+    No data copy: no_data_migration method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gp2-to-gp3-conversion" class="md-nav__link">
+    Gp2 to Gp3 conversion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance-window-steps" class="md-nav__link">
+    Maintenance window steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#volume-and-service-specifics" class="md-nav__link">
+    Volume and service specifics
+  </a>
+  
+    <nav class="md-nav" aria-label="Volume and service specifics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql-volumes-xvdm" class="md-nav__link">
+    MySQL volumes (xvdm)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-xvdn" class="md-nav__link">
+    Backup (xvdn)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gluster-xvdo" class="md-nav__link">
+    Gluster (xvdo)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mntfs-xvdb" class="md-nav__link">
+    Mntfs (xvdb)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#livedev-enabled-sites" class="md-nav__link">
+    Livedev-enabled sites
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reset-xfs-dump-restore" class="md-nav__link">
+    Reset XFS dump-restore
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gluster-34-id" class="md-nav__link">
+    Gluster 3.4 ID
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#volume-cleanup" class="md-nav__link">
+    Volume Cleanup
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resize_volumes_manual/" class="md-nav__link">
+        Resize volumes manually
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11_17" type="checkbox" id="__nav_11_17" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11_17">
+          Fips 140 2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Fips 140 2" data-md-level="2">
+        <label class="md-nav__title" for="__nav_11_17">
+          <span class="md-nav__icon md-icon"></span>
+          Fips 140 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fips-140-2/fips_check/" class="md-nav__link">
+        Check whether a server is already FIPS compliant
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fips-140-2/fips_disable/" class="md-nav__link">
+        Disable FIPS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fips-140-2/fips_enable/" class="md-nav__link">
+        Enable FIPS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fips-140-2/fips_migrate_db/" class="md-nav__link">
+        Enable FIPS on DB servers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fips-140-2/fips_mysql_upgrade/" class="md-nav__link">
+        Upgrading mysql tier to be FIPS 140-2 compliant
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fips-140-2/fips_provision/" class="md-nav__link">
+        FIPS 140-2 compliant server provisioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#emergency-upsize-guidelines-ace-acsf-only" class="md-nav__link">
+    Emergency upsize guidelines (ACE &amp; ACSF only)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gluster-prep-dumps" class="md-nav__link">
+    Gluster Prep Dumps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparatory-steps" class="md-nav__link">
+    Preparatory steps
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparatory steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-and-attach-the-new-volume" class="md-nav__link">
+    Create and attach the new volume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-data-rsync-method" class="md-nav__link">
+    Copy data: rsync method
+  </a>
+  
+    <nav class="md-nav" aria-label="Copy data: rsync method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note" class="md-nav__link">
+    Important Note
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disclaimer" class="md-nav__link">
+    Disclaimer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-data-xfs-dump-restore-method" class="md-nav__link">
+    Copy data: XFS dump-restore method
+  </a>
+  
+    <nav class="md-nav" aria-label="Copy data: XFS dump-restore method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note_1" class="md-nav__link">
+    Important  Note
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-data-copy-no_data_migration-method" class="md-nav__link">
+    No data copy: no_data_migration method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gp2-to-gp3-conversion" class="md-nav__link">
+    Gp2 to Gp3 conversion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance-window-steps" class="md-nav__link">
+    Maintenance window steps
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#volume-and-service-specifics" class="md-nav__link">
+    Volume and service specifics
+  </a>
+  
+    <nav class="md-nav" aria-label="Volume and service specifics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql-volumes-xvdm" class="md-nav__link">
+    MySQL volumes (xvdm)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-xvdn" class="md-nav__link">
+    Backup (xvdn)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gluster-xvdo" class="md-nav__link">
+    Gluster (xvdo)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mntfs-xvdb" class="md-nav__link">
+    Mntfs (xvdb)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#livedev-enabled-sites" class="md-nav__link">
+    Livedev-enabled sites
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reset-xfs-dump-restore" class="md-nav__link">
+    Reset XFS dump-restore
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gluster-34-id" class="md-nav__link">
+    Gluster 3.4 ID
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#volume-cleanup" class="md-nav__link">
+    Volume Cleanup
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/acquia/ops-runbook-fields.git/edit/master/docs/standard_maintenance/resize_volumes.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="resize-volumes">Resize volumes</h1>
+<p>EBS volumes can be resized to any of the
+<a href="https://confluence.acquia.com/display/OP/Acquia+Hosting+Guide#AcquiaHostingGuide-StandardVolumeSizes=28Gigabytes%29">supported sizes</a>
+, provided the data fits. The supported sizes are a business restriction, not a
+technical restriction.</p>
+<p>Volumes must be either <strong>magnetic</strong> or <strong>SSD</strong> except for backup volume. Backup volume type should be <strong>magnetic</strong> for ACE/ACP customers and <strong>SSD</strong> for ACSF (EG1/WMG/TREX).
+ Below table lists the recommended storage type for volumes:</p>
+<pre><code> | Volume       | Storage type                                               |
+ |--------------|------------------------------------------------------------|
+ | Database     | SSD (gp3)                                                  |
+ | Filesystem   | SSD (gp3)                                                  |
+ | Database     | SSD (gp2)                                                  |
+ | Filesystem   | SSD (gp2)                                                  |
+ | Backup       | Magnetic (standard for ACE/ACP) .                          |
+ | Backup       | SSD (gp3 for ACSF)                                         |
+</code></pre>
+<p><strong>Note</strong> While upsizing existing volumes, keep the same storage type as existing unless it is specified to change the storage type in the ticket.</p>
+<p><strong>Note</strong> This runbook is also applicable for ACP volume resizes now.</p>
+<p>The sizes of ephemeral volumes ('/dev/xvda' and '/dev/xvdb') are tied to the
+<code>ami_type</code> and can not be changed.</p>
+<p>Only mntfs volumes can be resized directly, see <a href="#mntfs-xvdb">Mntfs (xvbd)</a>.
+For all other purpose EBS volumes (FS,DB), we create new EBS volumes, copy the data,
+and exchange the volumes. Creating the volumes and copying the data is done in
+two phases with a prep phase and a maintenance window phase.
+Copying the data is typically done with the XFS tools for Gluster bricks and
+rsync for MySQL volumes. Exchanging the volumes requires a maintenance window.
+During this window, services are stopped and an incremental copy is made before
+volumes are exchanged.</p>
+<p><strong>Note</strong>: In fields, volume devices are referred to as '/dev/sda', etc, even if
+the devices are really '/dev/xvda' on the server itself. This is because of
+the device handler used by the kernel on the instance. sd = SCSI Disk driver
+and xvd = Xen Virtualisation Disk driver. <code>man sd</code> for some extra low level
+info.</p>
+<p><strong>Note</strong>: SSD's are supported for database volumes but cost extra so existing
+volumes should be resized to the same type unless specifically requested and
+approved.</p>
+<p><strong>Note</strong>: All magnetic (standard) volumes will have a size of less than 38 Gb or
+greater than 125 Gb. Most of them 125Gb. Note this is the size of the volume
+not the partition.</p>
+<h2 id="emergency-upsize-guidelines-ace-acsf-only">Emergency upsize guidelines (ACE &amp; ACSF only)</h2>
+<ol>
+<li>
+<p>Start emergency upsizing the volumes (DB/FS) if the volume filling rate has been high or reached 100% and customer/support isn't able to clear any data.</p>
+</li>
+<li>
+<p>Proceed with emergency upsize if customer has been non-responsive over 3 or more crits to clear the data.</p>
+</li>
+<li>
+<p>Proceed for an emergency conversion to gp3 if IOPs usage is very high and disk usage is less. If IOPs and usage both are high and creating DB replication lag then proceed with emergency upsize to gp2 or gp3.</p>
+</li>
+<li>
+<p>For ACP - we don't perform emergency upsize. File an SL ticket if customer is unresponsive over 3 crits or more and get confirmation for removing them from monitoring.</p>
+</li>
+<li>
+<p>File an AM ticket after upsize from the <a href="https://portal.ais.acquia.io/form/dealsheet">ops portal</a></p>
+</li>
+<li>
+<p>If the upsize is running over your shift, please include handoff notes mentioning all what has been done and what is left to make it easy for the next engineer to pick it up.</p>
+</li>
+</ol>
+<p>We can refer this Flowchart to decide on whether to do an Emergency Upsize or some other step to deal with a Disk Partition Alert :</p>
+<p>Scope of Flowchart : Gluster and DB file system Volumes of ACE , ACSF and ACP</p>
+<p><img alt="Disk Partition Alert Flowchart" src="../images/disk_partition_alert_flowchart_1.png" /></p>
+<h2 id="gluster-prep-dumps">Gluster Prep Dumps</h2>
+<p>It is possible that doing multiple gluster dumps at once (rsync or xfsdump)
+will cause an outage. You can create and mount the new volumes in parallel, but
+unless you are very sure that there is enough CPU, memory, and i/o bandwidth
+available to do two gluster dumps at once, you should do <strong>one</strong> at a time.</p>
+<h2 id="preparatory-steps">Preparatory steps</h2>
+<p>To be completed before the maintenance window opens. If downsizing, make sure
+the space currently used is less than 95% of the new volume size.</p>
+<pre><code class="language-bash">SERVER=
+SIZE=
+JIRA_TICKET=
+</code></pre>
+<h3 id="create-and-attach-the-new-volume">Create and attach the new volume</h3>
+<ol>
+<li>
+<p>Gather volume volume information and put it in the ticket.</p>
+<pre><code> sv-vollist ${SERVER}
+</code></pre>
+</li>
+<li>
+<p>Get the volume id</p>
+<p>The volume id is the number after id: in the output of sv-vollist. It does not
+start with vol-.</p>
+<pre><code> VOLUME_ID=
+ VOLUME_TYPE=(gp3 gp2 or standard)
+</code></pre>
+</li>
+<li>
+<p>If you need to start at a specific time, calculate the UNIX_START_TIME variable:</p>
+<pre><code> UNIX_START_TIME=$(date -d '2018/03/22 20:00 UTC' +"%s")
+</code></pre>
+<p>add the following flag to your ah-volume resize command:</p>
+<pre><code> --scheduled-time ${UNIX_START_TIME}
+</code></pre>
+</li>
+<li>
+<p>If you want to resume a workflow task at a specific time, calculate
+   UNIX_START_TIME as above, then schedule it to resume (you must do this after
+   starting the workflow with <code>ah-volume resize</code> below):</p>
+<pre><code>  WORKFLOW_ID=
+  ah-workflow schedule-resume ${WORKFLOW_ID} \
+   --scheduled-time ${UNIX_START_TIME}
+</code></pre>
+<p><strong>WARNING:</strong> This is not safe for HA pairs since there is no mechanism in
+place to ensure clean failover.</p>
+</li>
+<li>
+<p>To Find/Check scheduled maintenance information and status, run</p>
+<pre><code>  scheduled_task=$(ah-workflow get ${WORKFLOW_ID} | grep -w "scheduled_task_ids.0"|cut -d: -f2)
+  wf-scheduled or ah-scheduled-task get $scheduled_task
+</code></pre>
+</li>
+<li>
+<p>To Cancel/Remove the scheduled task in case if your maintenance will be cancelled, Run</p>
+<pre><code>  ah-scheduled-task kill $scheduled_task
+</code></pre>
+</li>
+</ol>
+<p><strong>Beware:</strong> Always check the last hrs update in your maintenance ticket for cancellation updates if any.</p>
+<ol>
+<li>
+<p>Add a runbook entry.</p>
+<pre><code> VOLUME=[mysql|gfs|backup]
+ fssh $SERVER "sudo ah-runbook \
+   '${JIRA_TICKET} - ${USER} - ${VOLUME} to ${SIZE}'"
+</code></pre>
+</li>
+<li>
+<p>Adding encryption to volumes:</p>
+<p><strong>Encryption is required</strong> add <code>--set-encryption</code> to the resize command.</p>
+<p><strong>Encryption is only supported for the following ami_types</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Instance type sizes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c4</td>
+<td>c4.large c4.xlarge c4.2xlarge c4.4xlarge c4.8xlarge c4.16xlarge</td>
+</tr>
+<tr>
+<td>c5</td>
+<td>c5.large c5.xlarge c5.2xlarge c5.4xlarge c5.9xlarge c5.18xlarge</td>
+</tr>
+<tr>
+<td>cr1</td>
+<td>cr1.8xlarge</td>
+</tr>
+<tr>
+<td>d2</td>
+<td>d2.xlarge d2.2xlarge d2.4xlarge d2.8xlarge</td>
+</tr>
+<tr>
+<td>g2</td>
+<td>g2.2xlarge g2.8xlarge</td>
+</tr>
+<tr>
+<td>m4</td>
+<td>m4.large m4.xlarge m4.2xlarge m4.4xlarge m4.10xlarge m4.16xlarge</td>
+</tr>
+<tr>
+<td>m5</td>
+<td>m5.large m5.xlarge m5.2xlarge m5.4xlarge m5.12xlarge m5.24xlarge</td>
+</tr>
+<tr>
+<td>r4</td>
+<td>r4.large r4.xlarge r4.2xlarge r4.4xlarge r4.8xlarge r4.16xlarge</td>
+</tr>
+<tr>
+<td>t2</td>
+<td>t2.large</td>
+</tr>
+</tbody>
+</table>
+<p>List based on Aq Gem Instance Features aq/aws_helpers/ec2/instance_features.rb</p>
+</li>
+</ol>
+<h3 id="copy-data-rsync-method">Copy data: rsync method</h3>
+<h4 id="important-note"><em>Important Note</em></h4>
+<blockquote>
+<p><strong><em>Do not abort workflows!</em></strong></p>
+</blockquote>
+<ul>
+<li>If you are unable to resolve a problem with a workflow, raise the incident to Ops Management for approval to escalate it to Cloud through Ops Portal:<ul>
+<li><a href="https://portal.ais.acquia.io/form/clescalate">https://portal.ais.acquia.io/form/clescalate</a></li>
+</ul>
+</li>
+<li>Use this list of components to identify which Cloud team to assign it to:<ul>
+<li><a href="https://confluence.acquia.com/display/CL/Cloud+Workflow+Ownership">https://confluence.acquia.com/display/CL/Cloud+Workflow+Ownership</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong>: Unless the customer wants their FS (gluster) volumes to be a
+'standard' volume type, the gluster bricks must always be set to SSD i.e. 'gp3' or 'gp2'.
+Be sure to check the ticket description.</p>
+<p><strong>Note</strong>: Please do not purge binlogs during DB volume upsize even if the site is down. Purging binlogs during a DB volume upsize might corrupt that DB upon finishing.</p>
+<p>All volumes must be encrypted by default now. Please ensure that instance
+type supports encrypted ebs volumes before starting the workflow.</p>
+<h4 id="disclaimer"><em>Disclaimer</em></h4>
+<p>Before initiating a rsync workflow for db cluster, make sure to check if the following condition is met:</p>
+<p>New volume size &gt; (Current_Disk_Size + Biggest_File_on_the_Current_Disk/particularly ibdata1 file)</p>
+<p>If the above condition doesn't met or if the size of a particular file like ibdata1 file is huge, then we should use 'xfsdump' method to upsize the volume. However if you face any issue with 'xfsdump' method then escalate the issue to DBA.</p>
+<p><strong><em>NOTE:</em></strong> After resizing the volume on each server, make sure to remount Gluster server. This is a mandatory step and applicable to FS volumes only.</p>
+<p>Typically used for MySQL, but also works with Gluster bricks.</p>
+<pre><code>    ah-volume resize ${VOLUME_ID} --new-size ${SIZE} --method rsync \
+      --pause-at-step disable_backups --set-encryption \
+      --pause-description "${JIRA_TICKET} - ${USER}" \
+      --send-notifications false
+</code></pre>
+<p><strong>Note</strong>: In order to receive workflow failure notifications <code>--send-notications false</code> flag can be avoided.</p>
+<p>If this is a scheduled workflow with no pause and add encryption, on one
+of supported instance types listed on the table above, use:</p>
+<p><strong><em>NOTE:</em></strong> After resizing the volume on each server, make sure to remount Gluster server. This is a mandatory step and applicable to FS volumes only.</p>
+<pre><code>    ah-volume resize ${VOLUME_ID} --new-size ${SIZE} --method rsync \
+    --set-encryption --scheduled-time ${UNIX_START_TIME} \
+    --send-notifications false
+</code></pre>
+<p>Ops can use below command for MySQL volumes resize only for DEDs/FSDBs/DBMASTERs</p>
+<pre><code>    PRIMARY_DB_SERVER=
+    ah-db-cluster resize-storage $PRIMARY_DB_SERVER --new-size ${SIZE} --method rsync \
+    --set-encryption --scheduled-time ${UNIX_START_TIME} \
+    --send-notifications false
+</code></pre>
+<p><strong>Note</strong>: In order to receive workflow failure notifications <code>--send-notications false</code> flag can be avoided.</p>
+<h3 id="copy-data-xfs-dump-restore-method">Copy data: XFS dump-restore method</h3>
+<h4 id="important-note_1"><em>Important  Note</em></h4>
+<blockquote>
+<p><strong><em>Do not abort workflows!</em></strong></p>
+</blockquote>
+<ul>
+<li>If you are unable to resolve a problem with a workflow, raise the incident to Ops Management for approval to escalate it to Cloud through Ops Portal:<ul>
+<li><a href="https://portal.ais.acquia.io/form/clescalate">https://portal.ais.acquia.io/form/clescalate</a></li>
+</ul>
+</li>
+<li>Use this list of components to identify which Cloud team to assign it to:<ul>
+<li><a href="https://confluence.acquia.com/display/CL/Cloud+Workflow+Ownership">https://confluence.acquia.com/display/CL/Cloud+Workflow+Ownership</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong>: Unless the customer wants their FS (gluster) volumes to be a
+'standard' volume type, the gluster bricks must always be set to SSD i.e. 'gp3' or 'gp2'.
+Be sure to check the ticket description.</p>
+<p>This also works for MySQL volumes. For gluster xfsdumps: If this is the second
+server you are doing an xfsdump on, make sure the first one is finished, or there
+is more than enough I/O bandwidth to spare. Two gluster dumps at once can cause
+an outage.</p>
+<p><strong>Note</strong>: Please do not purge binlogs during DB volume upsize even if the site is down. Purging binlogs during a DB volume upsize might corrupt that DB upon finishing.</p>
+<p>All volumes must be encrypted by default now. Please ensure that instance
+type supports encrypted ebs volumes before starting the workflow.</p>
+<ol>
+<li>For GlusterFS bricks set the type to <code>gp3</code>:</li>
+</ol>
+<p><strong><em>NOTE:</em></strong> After resizing the volume on each server, make sure to remount Gluster server. This is a mandatory step and applicable to FS volumes only.</p>
+<pre><code>    ah-volume resize ${VOLUME_ID} --new-size ${SIZE} --method xfsdump \
+      --ebs-volume-type ${VOLUME_TYPE} \
+      --set-encryption \
+      --pause-at-step disable_backups \
+      --pause-description "${JIRA_TICKET} - ${USER}" \
+      --send-notifications false
+</code></pre>
+<ol>
+<li>For other volumes:</li>
+</ol>
+<p><strong><em>NOTE:</em></strong> After resizing the volume on each server, make sure to remount Gluster server. This is a mandatory step and applicable to FS volumes only.</p>
+<pre><code>    ah-volume resize ${VOLUME_ID} --new-size ${SIZE} --method xfsdump \
+      --set-encryption \
+      --pause-at-step disable_backups \
+      --pause-description "${JIRA_TICKET} - ${USER}" \
+      --send-notifications false
+</code></pre>
+<p><strong>Note</strong>: In order to receive workflow failure notifications <code>--send-notications false</code> flag can be avoided.</p>
+<p><strong>Note</strong>: There is a <a href="https://backlog.acquia.com/browse/CL-24895">bug</a> due to
+which a workflow fails if the volume has been upsized previously using xfsdump.
+In that case, please remove <code>xfsrestorehousekeepingdir</code> and <code>orphanage</code> directories
+from <code>/mnt/gfs</code> before starting the workflow. Also, check if /mnt/brickXXXX has these
+directories and cleanup them if they exist from there too.</p>
+<h3 id="no-data-copy-no_data_migration-method">No data copy: no_data_migration method</h3>
+<p><strong>Warning</strong>: this method will create empty volumes <strong>discarding any existing data</strong>.
+It is usefull for backup volumes where we don't need to wait for data copy.
+It should NEVER be used on gfs or mysql volumes!</p>
+<p>If this is a scheduled workflow with no pause and add encryption on supported
+instances use:</p>
+<pre><code>    ah-volume resize ${VOLUME_ID} --new-size ${SIZE} --method no_data_migration \
+    --set-encryption --scheduled-time ${UNIX_START_TIME} \
+    --send-notifications false
+</code></pre>
+<p><strong>Note</strong>: In order to receive workflow failure notifications <code>--send-notications false</code> flag can be avoided. Also keep in mind, backup volume type should be <strong>magnetic</strong> for ACE/ACP customers and <strong>SSD</strong> for ACSF (EG1/WMG/TREX).</p>
+<h2 id="gp2-to-gp3-conversion">Gp2 to Gp3 conversion</h2>
+<p>If IOPs usage is very high and disk usage is less for FS or DB volume or DB replication is very high due to high IOPs then procced with conversion from standard or gp2 to gp3 using a worklfow.</p>
+<pre><code>    ah-volume resize ${VOLUME_ID} --new-size ${SIZE} --method xfsdump \
+      --ebs-volume-type ${VOLUME_TYPE} \
+      --set-encryption \
+      --send-notifications false
+</code></pre>
+<h2 id="maintenance-window-steps">Maintenance window steps</h2>
+<p>These steps <em>must</em> be completed during the assigned maintenance window.</p>
+<ol>
+<li>
+<p>Verify the prep work completed properly</p>
+<pre><code>WORKFLOW_ID=
+ah-workflow get ${WORKFLOW_ID}
+</code></pre>
+<p>The status field should be set to user_pause. If it's in an error state, debug
+the workflow</p>
+<pre><code>    ah-workflow get ${WORKFLOW_ID} --show-logs
+</code></pre>
+</li>
+<li>
+<p>Verify the person actioning the previous steps left an ah-runbook entry.
+   Create an entry if they forgot to.</p>
+<pre><code>ah-runbook
+</code></pre>
+</li>
+<li>
+<p>For HA clusters, follow the procedure to work on one server at a time in the
+   <a href="#volume-and-service-specifics">section on volume specifics</a> below.</p>
+</li>
+<li>
+<p>Resume the workflow to complete the resize</p>
+<pre><code>ah-workflow resume ${WORKFLOW_ID}
+</code></pre>
+</li>
+<li>
+<p>If the volume was Gluster <a href="#backup-sdn">Resize the backup volume</a> to match.</p>
+</li>
+</ol>
+<h2 id="volume-and-service-specifics">Volume and service specifics</h2>
+<ul>
+<li><a href="#mysql-volumes-xvdm">MySQL (xvdm)</a></li>
+<li><a href="#backup-xvdn">Backup (xvdn)</a></li>
+<li><a href="#gluster-xvdo">Gluster (xvdo)</a></li>
+<li><a href="#mntfs-xvdb">Mntfs (xvdb)</a></li>
+</ul>
+<h3 id="mysql-volumes-xvdm">MySQL volumes (xvdm)</h3>
+<p>In an HA cluster, upsize one server at a time.</p>
+<ol>
+<li>
+<p>Check that replication is in sync and the primary (first) server is active.</p>
+<pre><code>ah-db-cluster status ${SERVER}
+</code></pre>
+</li>
+<li>
+<p>Lock replication to the primary.</p>
+<pre><code>ah-db-cluster lock ${SERVER}
+</code></pre>
+</li>
+<li>
+<p>When the secondary is resized and workflow has completed, check that
+   replication is in sync.</p>
+<pre><code>ah-db-cluster status ${SERVER}
+</code></pre>
+</li>
+<li>
+<p>When it is, unlock and fail over. Otherwise, fix it, or escalate to a DBA.</p>
+<pre><code>ah-db-cluster unlock ${SERVER}
+dns-update $CLUSTER $SECONDARY
+</code></pre>
+</li>
+<li>
+<p>On the primary (but now inactive) server, resize the volume as with the secondary.</p>
+</li>
+<li>
+<p>After upsizing, check replication, unlock, and fail back as before.</p>
+</li>
+</ol>
+<h3 id="backup-xvdn">Backup (xvdn)</h3>
+<p>This volume matches the Gluster brick in size on staging servers and the
+primary server in HA FS clusters.</p>
+<p><strong>Note</strong>: The volume on the secondary FS server is always 1G in size.</p>
+<p><strong>Note for encryption</strong>: If you have encrypted the FS volumes (gluster bricks), both
+the backup-ebs volumes will need encryption as well.</p>
+<ol>
+<li>
+<p>Set variables.</p>
+<pre><code>SIZE=
+SDN_VOLUME_ID=
+</code></pre>
+</li>
+<li>
+<p>Check volume-type is magnetic, reported as standard.</p>
+<pre><code>sv-vollist $server
+</code></pre>
+</li>
+<li>
+<p>For ACE/ACP, if not magnetic, please specify new volume as magnetic simultaneous with the
+   resize.</p>
+<pre><code>ah-volume resize ${SDN_VOLUME_ID} --new-size ${SIZE} --method rsync --ebs-volume-type=standard --send-notifications false
+</code></pre>
+</li>
+<li>
+<p>For ACSF (EG1/WMG/TREX), if not SSD, please specify new volume as gp3 simultaneous with the resize.</p>
+<pre><code>ah-volume resize ${SDN_VOLUME_ID} --new-size ${SIZE} --method rsync --ebs-volume-type=gp3 --send-notifications false
+</code></pre>
+</li>
+<li>
+<p>If already encryption is supported, resize to an empty backup volume after setting the appropriate EBS volume type.</p>
+<pre><code>ah-volume resize ${SDN_VOLUME_ID} --new-size ${SIZE} --set-encryption \
+--method no_data_migration --send-notifications false
+</code></pre>
+</li>
+</ol>
+<h3 id="gluster-xvdo">Gluster (xvdo)</h3>
+<p>After resizing the volume on each server, remount Gluster server. Make sure
+it properly remounts on every server. (Often, remounting twice will take care
+of this). The reason we remount gluster first is that during the time the
+gluster service has been offline the clients may have completely timed out
+retrying their connections; this starts up the retry loop so that when the
+firewall rule is removed they sanely reconnect.</p>
+<pre><code>    site-fsremount ${SITE}
+</code></pre>
+<h3 id="mntfs-xvdb">Mntfs (xvdb)</h3>
+<p>Volumes mounted to <code>/mnt/</code> on EBS-backed instances, so called <code>mntfs</code> volumes,
+can be upsized with the <code>ah-volume upsize-mntfs</code> subcommand by defining the
+server name and the target size in GiB:</p>
+<pre><code>ah-volume upsize-mntfs --server-name=${SERVER_NAME} --target-size=${TARGET_SIZE}
+</code></pre>
+<p><strong>Note</strong>: In order to receive workflow failure notifications <code>--send-notications false</code> can be avoided.</p>
+<p>It triggers a workflow in the background that first increases the EBS volume size
+to the given target size via AWS API. Then it expands the xfs partition to the
+maximum size of the volume with <code>xfs_growfs</code>. The workflow operates on the fly
+without unmounting or detaching the volume. NO backup will be saved by the workflow.
+The filesystem remains readable and writable during the operation. The additional
+space becomes available after the worklow finishes.</p>
+<p><strong>Note</strong>: The command works only on <em>Current Generation</em> intance types and on
+some of the <em>Previous Generation</em> instance types. For more detailed info check the
+<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modify-volume.html">AWS documentation</a></p>
+<p><strong>Note</strong>: Amazon doesn't allow you to change the size of a volume within 6 hours
+more than once. So a consecutive call of <code>upsize-mntfs</code> will fail. In this case the
+workflow will be suspended, but it can be resumed after the resize limit period
+expired.</p>
+<p><strong>Note</strong>: The subcommand can only increase volumes. It does not allow volume
+downsize.</p>
+<h3 id="livedev-enabled-sites">Livedev-enabled sites</h3>
+<p>If the site has livedev enabled, audit the webs post-resize to make sure that livedev exists, has a docroot, and belongs to the correct user and group.</p>
+<pre><code>    SERVERS=($(ah-server list site:$SITE -w typeINded,staging,web))
+    for srv in ${SERVERS[@]}; do
+        echo
+        echo "SERVER: $srv"
+        fssh $srv  "sudo ls -lah /mnt/gfs/${SITE}/livedev/" 2&gt;/dev/null
+    done
+</code></pre>
+<p>If livedev is in broken state on any of the webs, do another site-fsremount and check again. Remounting the filesystem should fix the problem, but if the filesystem is not successfully remounted, the customer may see staging task failures down the road.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="reset-xfs-dump-restore">Reset XFS dump-restore</h3>
+<p>If for any reason you have to reset the process and start again, you only need
+to modify the destination:</p>
+<pre><code>    rm -Rf /mnt/${DEV}/{orphanage,xfsrestorehousekeepingdir}
+</code></pre>
+<h3 id="gluster-34-id">Gluster 3.4 ID</h3>
+<p>If Gluster 3.4 complains it lost the ID, do the following to fix it.</p>
+<pre><code>    export BRICK=/mnt/brick12312/brick
+    export FSCLUSTER=ded-sitename
+    export VOL_ID=$(grep volume-id /var/lib/glusterd/vols/${FSCLUSTER}/info \
+      | cut -d= -f2 \
+      | sed 's/-//g')
+    setfattr -n trusted.glusterfs.volume-id -v 0x${VOL_ID} ${BRICK}
+    gluster volume start ${FSCLUSTER}
+    ah-config-gluster
+</code></pre>
+<h2 id="volume-cleanup">Volume Cleanup</h2>
+<p>This procedure is only to be used if you are cleaning up volumes from a failed workflow.</p>
+<ol>
+<li>
+<p>Get the volume details and set variables:</p>
+<pre><code>sv-vollist $SERVER
+
+DEVICE=[/dev/xvdx | /dev/xvdy | /dev/xvdz]
+EBS_ID=
+VOL_ID=
+REGION=
+</code></pre>
+<p>Here <code>EBS_ID</code> is the AWS volume identifier that starts with <code>vol-</code> (under heading <code>ebs_id)</code>
+and <code>VOL_ID</code> is the fields volume identifier under the heading <code>id</code> in the output of <code>sv-vollist $SERVER</code>.</p>
+</li>
+<li>
+<p>Unmount the volume:</p>
+<pre><code>fssh $SERVER "sudo umount -f $DEVICE"
+</code></pre>
+</li>
+<li>
+<p>Detach this volume from server:</p>
+<pre><code>aws ec2 detach-volume --region $REGION --volume-id $EBS_ID
+</code></pre>
+</li>
+<li>
+<p>Once detached successfully, delete this volume:</p>
+<pre><code>aws ec2 delete-volume --region $REGION --volume-id $EBS_ID
+</code></pre>
+</li>
+<li>
+<p>Update fields record for this deleted volume:</p>
+<pre><code>ah-volume edit $VOL_ID -s server_id=0
+</code></pre>
+</li>
+</ol>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../replace_volumes/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Replacing a Bad Volume Manually" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Replacing a Bad Volume Manually
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../resize_volumes_manual/" class="md-footer__link md-footer__link--next" aria-label="Next: Resize volumes manually" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Resize volumes manually
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>
