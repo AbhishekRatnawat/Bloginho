@@ -1,4 +1,8 @@
-site_name: Ops Runbooks for Fields
+site_name: Oh My Blogggg!
 theme: material
 
-repo_url: https://github.com/acquia/ops-runbook-fields.git
+repo_url: https://github.com/AbhishekRatnawat/mkdocs-sample
+
+markdown_extensions:
+  - pymdownx.tasklist:
+      custom_checkbox: true
