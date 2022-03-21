@@ -1,8 +1,9 @@
-site_name: Oh My Blogggg!
+site_name: Bloginho
 theme: material
 
 repo_url: https://github.com/AbhishekRatnawat/mkdocs-sample
 
 markdown_extensions:
+  - def_list
   - pymdownx.tasklist:
       custom_checkbox: true
